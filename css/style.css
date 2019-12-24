@@ -1,0 +1,16 @@
+.about{
+    text-align: center;
+    margin: auto;
+    border-radius: 50%;
+    background-color: white;
+    padding: 40px;
+    margin-bottom: 20px;
+}
+.handle-card{
+    padding: 20px 50px;
+    margin: auto;
+    max-height: 250px;
+    clear: both;
+    text-align: center;
+    border-radius: 4px;
+}
