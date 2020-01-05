@@ -1,3 +1,12 @@
+/** Global CSS **/
+.hide{
+    display: none;
+}
+.show{
+    display: block;
+}
+
+/** Custom CSS **/
 .about{
     text-align: center;
     margin: auto;
@@ -8,9 +17,28 @@
 }
 .handle-card{
     padding: 20px 50px;
-    margin: auto;
+    margin-top: 15px;
     max-height: 250px;
-    clear: both;
     text-align: center;
     border-radius: 4px;
+}
+
+/** Spinner CSS  **/
+.spinner{
+    text-align: center;
+}
+
+.mdl-spinner{
+    top: 100px;
+}
+
+
+/** chart css **/
+#verdictChart{
+    height: 450px;
+    width: 100%;
+}
+#languageChart{
+    height: 450px;
+    width: 100%;
 }
