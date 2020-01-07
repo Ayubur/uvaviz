@@ -12,23 +12,33 @@ var count=0;
 
 // calculating unsolved problems
 function unsolvedProblems (array,userId){
-   var unsolved_probs =[];
+  // var unsolved_probs_id =[];
+  var unsolved_probs_num =[];
 
    for(var i=0;i<array.length;i++){
       $.ajax(`https://uhunt.onlinejudge.org/api/subs-pids/${userId}/${array[i][1]}/0`).then(function(data){
-           var length =data[userId].subs.length;
+         var length =data[userId].subs.length;
+         var prob_id=data[userId].subs[length-1][1];
            if(data[userId].subs[length-1][2] != 90){
-            console.log(data[userId].subs[length-1][1]);
-              unsolved_probs[i]= data[userId].subs[length-1][1];
+              $.ajax(`https://uhunt.onlinejudge.org/api/p/id/${data[userId].subs[length-1][1]}`).then(function(data){
+                 if(! unsolved_probs_num.includes(data.num)){
+                     unsolved_probs_num.push(data.num);
+                     $('#unsolvedProblems').append("<a href='https://onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem="+prob_id+"' target='_blank'>"+data.num+"</a>")
+                 }
+                })
            }
       })
+
+
    }
-  console.log(unsolved_probs);
+   
 }
 
 //displaying submission languages
 
-function submissionLanguages(array){
+function submissionLanguages(array,username){
+  $('#lanTitle').text('Languages of '+username);
+
   var ansi=0,java=0,cPlus=0,pascal=0, cPlus11=0;
   var chartData =[];
    for(var i=0;i<array.length;i++){
@@ -61,7 +71,6 @@ am4core.ready(function() {
       chart.data = chartData ;
 
       var series = chart.series.push(new am4charts.PieSeries3D());
-      series.labels.template.disabled = true;
       series.ticks.template.disabled = true;
       series.dataFields.value = "total";
       series.dataFields.depthValue = "total";
@@ -69,13 +78,24 @@ am4core.ready(function() {
       series.slices.template.cornerRadius = 5;
       series.colors.step = 3;
 
+      series.labels.template.text = "{category}";
+      series.labels.template.radius = am4core.percent(-80);
+      series.alignLabels = false;
+      series.labels.template.fill = am4core.color("white");
+      // series.labels.template.relativeRotation = 90;
+      series.labels.template.adapter.add("hidden",(hidden, target)=>{
+            return target.dataItem.values.value.percent < 5 ? true : false;
+      });
+
 
 })
 }
 
 
 //displaying submitted verdics
-function verdict(array){
+function verdict(array,username){
+  $('#verdictTitle').text('Verdicts of '+username);
+
     var SE=0,CE=0,RE=0,OL=0,TL=0,ML=0,WA=0,PE=0,Accepted=0;
     var chartData=[];
 
@@ -122,14 +142,21 @@ function verdict(array){
           chart.data = chartData ;
 
           var series = chart.series.push(new am4charts.PieSeries3D());
-          series.labels.template.disabled = true;
+          //series.labels.template.disabled = true;
           series.ticks.template.disabled = true;
+          series.labels.template.text = "{category}";
+          series.labels.template.radius = am4core.percent(-80);
+          series.alignLabels = false;
+         series.labels.template.fill = am4core.color("white");
+          series.labels.template.relativeRotation = 90;
           series.dataFields.value = "total";
           series.dataFields.depthValue = "total";
           series.dataFields.category = "error";
-          series.slices.template.cornerRadius = 5;
+          series.slices.template.cornerRadius = 8;
           series.colors.step = 3;
-
+          series.labels.template.adapter.add("hidden",(hidden, target)=>{
+            return target.dataItem.values.value.percent < 5 ? true : false;
+          });
 
     })
 }
@@ -146,8 +173,9 @@ $(document).ready(function(){
                  $('.mdl-grid').removeClass('hide')
             }
            $('.mdl-spinner').addClass('is-active');
-            $.when($.ajax(`https://uhunt.onlinejudge.org/api/uname2uid/${input_val}`)).then(function(userId){
-            	  
+           $('#unsolvedProblems').empty();
+           $('.card-heading').empty();
+          $.ajax(`https://uhunt.onlinejudge.org/api/uname2uid/${input_val}`).then(function(userId){ 
                if (userId <=0) {
 				        $("#input-div").addClass("is-invalid");
 				        $("#input-div").addClass("is-dirty");
@@ -159,8 +187,8 @@ $(document).ready(function(){
            $('.mdl-spinner').removeClass('is-active');
 
               $.ajax(`https://uhunt.onlinejudge.org/api/subs-user/${userId}`).then(function(data){
-                        submissionLanguages(data.subs);
-                        verdict(data.subs);
+                        submissionLanguages(data.subs,input_val);
+                        verdict(data.subs,input_val);
                         unsolvedProblems(data.subs,userId);
                         $('.mdl-grid').removeClass('hide');
               })
