@@ -1,18 +1,81 @@
-function totalCount(array){
 
-var count=0;
-   for(var i=0;i<array.length;i++){
-        if(array[i][2]==90)
-               count ++;
-    }
+///HeatMap Implementation
 
-    return count;
+
+function dateConverter(timestamps){
+  // var obj ={};
+
+  // var a = new Date(timestamps * 1000);
+  // var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  // var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+  // var year = a.getFullYear();
+  // var dayName = days[a.getDay()];
+  // var month = a.getMonth()+1;
+  // var date = a.getDate();
+  // // var hour = a.getHours();
+  // // var min = a.getMinutes();
+  // // var sec = a.getSeconds();
+  // // var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+  // var fullDate= year+"-"+month+"-"+date;
+  
+  // return fullDate;
+
+    var d = new Date(timestamps*1000);
+        month = '' + (d.getMonth() + 1);
+        day = '' + d.getDate();
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+
+
+function yearConverter(timestamps){
+  var d = new Date(timestamps*1000);
+   var year =d.getFullYear();
+
+   return year;
+}
+
+
+function displayHeatmaps(array,username){
+
+     var data=[];
+     var years=[];
+
+
+    array.forEach(function(x){
+       years[yearConverter(x[4])]=(years[yearConverter(x[4])] || 0) + 1;
+        data.push(dateConverter(x[4]));
+    })
+
+   $('#heatMapsContainer').append("<span class='card-heading'>Submissions of "+username+"</span>");
+      $('#heatMapsContainer').append("<div id='heatMapContent'></div>");
+
+
+    Object.keys(years).reverse().forEach(function(key) {
+           
+       if(years[key]>=1){
+         $('#heatMapContent').append("<h6 class='heatmap-year'>"+key+"</h6>");
+          $('#heatMapContent').append("<div class='heatmap-size' id='heatmap-"+key+"'></div>");
+          $("#heatmap-"+key).calmosaic(data,{
+               lastYear: parseInt(key)+1,
+          });
+       }
+   });
+
+  
+
 }
 
 
 // calculating unsolved problems
 function unsolvedProblems (array,userId){
-  // var unsolved_probs_id =[];
   var unsolved_probs_num =[];
 
    for(var i=0;i<array.length;i++){
@@ -33,6 +96,8 @@ function unsolvedProblems (array,userId){
    }
    
 }
+
+
 
 //displaying submission languages
 
@@ -79,7 +144,7 @@ am4core.ready(function() {
       series.colors.step = 3;
 
       series.labels.template.text = "{category}";
-      series.labels.template.radius = am4core.percent(-80);
+      series.labels.template.radius = am4core.percent(-40);
       series.alignLabels = false;
       series.labels.template.fill = am4core.color("white");
       // series.labels.template.relativeRotation = 90;
@@ -90,6 +155,8 @@ am4core.ready(function() {
 
 })
 }
+
+
 
 
 //displaying submitted verdics
@@ -164,33 +231,50 @@ function verdict(array,username){
 
 
 
+//  Main Functions
+
 $(document).ready(function(){
     $('#handle').on('keydown', function(e){
         if(e.keyCode==13){
             e.preventDefault();
             var input_val = $(this).val();
-            if( ! $('.mdl-grid').hasClass('hide')){
-                 $('.mdl-grid').removeClass('hide')
-            }
-           $('.mdl-spinner').addClass('is-active');
-           $('#unsolvedProblems').empty();
-           $('.card-heading').empty();
+             $('.mdl-spinner').addClass('is-active');
+             $('.card-heading').empty();
+
+              if( ! $('.mdl-grid').hasClass('hide')){
+                   $('.mdl-grid').addClass('hide');
+             }
+            if( ! $('.sharethis').hasClass('hide')){
+                   $('.sharethis').addClass('hide');
+             }
+             $('#languageChart').empty();
+             $('#verdictChart').empty();
+             $('#unsolvedProblems').empty();
+             $('#heatMapsContainer').empty();
+
+          //converting username to userId
           $.ajax(`https://uhunt.onlinejudge.org/api/uname2uid/${input_val}`).then(function(userId){ 
+               
+
                if (userId <=0) {
-				        $("#input-div").addClass("is-invalid");
-				        $("#input-div").addClass("is-dirty");
-                 $('.mdl-spinner').removeClass('is-active');
-                  $('.mdl-grid').addClass('hide')
+    				        $("#input-div").addClass("is-invalid");
+    				        $("#input-div").addClass("is-dirty");
+                    $('.mdl-spinner').removeClass('is-active');
+                    $('.mdl-grid').addClass('hide')
 				        return;
 				      }
-           
-           $('.mdl-spinner').removeClass('is-active');
+             
+               $('.mdl-spinner').removeClass('is-active');
 
               $.ajax(`https://uhunt.onlinejudge.org/api/subs-user/${userId}`).then(function(data){
+                        
+                        $('.mdl-grid').removeClass('hide');
                         submissionLanguages(data.subs,input_val);
                         verdict(data.subs,input_val);
                         unsolvedProblems(data.subs,userId);
-                        $('.mdl-grid').removeClass('hide');
+                        displayHeatmaps(data.subs,input_val);
+                         $('.sharethis').removeClass('hide');
+      
               })
 
             })

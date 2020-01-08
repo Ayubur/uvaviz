@@ -8,14 +8,15 @@
     <title>UVA Visualizer</title>
        
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.cyan-light_blue.min.css">
+    <link rel="stylesheet" href="css/lib/material.cyan-light_blue.min.css">
+    <link rel="stylesheet" href="css/lib/calmosaic/jquery.calmosaic.min.css">
      <link rel="stylesheet" href="css/style.css" />
-    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="js/lib/material.min.js"></script>
 
-    <!-- Resources -->
-<script src="https://www.amcharts.com/lib/4/core.js"></script>
-<script src="https://www.amcharts.com/lib/4/charts.js"></script>
-<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+    <!--Amcharts Resources -->
+      <script src="https://www.amcharts.com/lib/4/core.js"></script>
+      <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+      <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
     
 </head>
 <body>
@@ -93,20 +94,33 @@
                 <span id="unsolvedTitle">Unsolved</span>
                 <div class="vertical-space"></div>
                  <div id="unsolvedProblems"></div>
- 
               </div>
            </div>
 
            <!-- unsolved problems end -->
+           <!-- HeatMaps Starts-->
+           <div class="mdl-grid hide">
+              <div  class="to-clear card mdl-shadow--2dp mdl-cell mdl-cell--12-col-desktop  mdl-cell--12-col-tablet" id="heatMapsContainer">
+
+              </div>
+           </div>
+            <!-- HeatMaps ends-->
+
+               <div class="share-div  mdl-cell mdl-cell--12-col">
+                <a class="sharethis hide" href="">share result</a>
+                <div class="vertical-space"></div>
+                  <p>Developed by <a href="https://facebook.com/tamim.rahman1">Ayubur</a></p>
+              </div>
         </main>
         <!--main content  End-->
         
     </div>
     
-    <script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
-    <script src="js/index.js"></script>
+    <script src="js/lib/jquery-3.4.1.min.js"></script>
+    <script src="js/lib/moment.min.js"></script>
+<script src="js/lib/calmosaic/jquery.calmosaic.min.js"></script>
+ 
+
+ <script src="js/index.js"></script>
 </body>
 </html>

@@ -1,4 +1,8 @@
 /** Global CSS **/
+a{
+   text-decoration: none;
+}
+
 .hide{
     display: none;
 }
@@ -60,6 +64,10 @@
     height: 400px;
     width: 100%;
 }
+.heatmap-size{
+    width: 100%;
+    height: auto;
+}
 
 
 /** Unsolved Probelms **/
@@ -72,7 +80,6 @@
 #unsolvedProblems a{
     color: rgb(64,196,255);
     font-weight: bold;
-    text-decoration: none;
     margin: 2px 5px;
     float: left;
 }
@@ -82,4 +89,42 @@
     font-weight: bold;
     font-size: 20px;
     margin: -20px;
+}
+
+
+/** HeatMap **/
+
+#heatMapsContainer{
+    padding: 35px 0px;
+}
+
+#heatMapContent{
+    margin-left: 25px;
+}
+
+.heatmap-year{
+    margin-left: 20px;
+     color: rgb(64,196,255);
+
+}
+
+.share-div{
+    text-align: center;
+    min-height: 200px;
+    margin-top: 20px;
+
+}
+
+.share-div>p>a{
+    color: rgb(64,196,255);
+        font-weight: bold;
+}
+
+.sharethis{
+    text-transform: uppercase;
+    font-weight: 600;
+    color: white;
+    padding: 6px 18px;
+    border-radius: 5px;
+    background-color: #4267b2;
 }
