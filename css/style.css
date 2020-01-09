@@ -80,9 +80,19 @@ a{
     text-align: center;
 }
 
-.mdl-spinner{
-    top: 100px;
+/** NOTE - spinner size is multiple of 28 **/
+.mdl-spinner {
+  width: 56px;
+  height: 56px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
 }
+
+.mdl-spinner__circle {
+  border-width: 6px;
+}
+
 
 
 /** chart css **/
