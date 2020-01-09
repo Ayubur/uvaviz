@@ -44,7 +44,7 @@ function yearConverter(timestamps){
 
 
 function displayHeatmaps(array,username){
-
+   
      var data=[];
      var years=[];
 
@@ -54,6 +54,7 @@ function displayHeatmaps(array,username){
         data.push(dateConverter(x[4]));
     })
 
+     $('#heatMapsContainer').removeClass('hide');
    $('#heatMapsContainer').append("<span class='card-heading'>Submissions of "+username+"</span>");
       $('#heatMapsContainer').append("<div id='heatMapContent'></div>");
 
@@ -76,6 +77,7 @@ function displayHeatmaps(array,username){
 
 // calculating unsolved problems
 function unsolvedProblems (array,userId){
+  $('#unsolvedProbs').removeClass('hide');
   var unsolved_probs_num =[];
 
    for(var i=0;i<array.length;i++){
@@ -97,12 +99,77 @@ function unsolvedProblems (array,userId){
    
 }
 
+// diaplaying tags of problems 
+async function tagsOfProblems(array,username){
 
+  var normal=0, special_judged=0;
+  var chartData=[];
+
+  for(var i=0;i<array.length;i++){
+     var response = await fetch(`https://uhunt.onlinejudge.org/api/p/id/${array[i][1]}`);
+     response.json().then((data)=>{
+         if(data.status == 1)
+             normal++;
+        else if(data.status ==2)
+             special_judged++;
+     });
+  }
+
+  chartData=[
+
+      {
+        "Name":"Normal",
+        "value":normal
+      },
+      {
+        "Name":"Special Judged",
+        "value":special_judged
+      }
+  ];
+
+  $('#probsTag').removeClass('hide');
+  $('#tagsTitle').text('Tags of '+username);
+
+ am4core.ready(function() {
+
+// Themes begin
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+// Create chart instance
+var chart = am4core.create("tagsChart", am4charts.PieChart);
+chart.legend = new am4charts.Legend();
+chart.legend.position="right";
+
+// Add data
+chart.data = chartData;
+
+// Set inner radius
+chart.innerRadius = am4core.percent(40);
+
+// Add and configure Series
+var pieSeries = chart.series.push(new am4charts.PieSeries());
+ pieSeries.ticks.template.disabled = true;
+ pieSeries.labels.template.disabled = true;
+pieSeries.dataFields.value = "value";
+pieSeries.dataFields.category = "Name";
+pieSeries.slices.template.stroke = am4core.color("#fff");
+pieSeries.slices.template.strokeWidth = 2;
+pieSeries.slices.template.strokeOpacity = 1;
+
+// This creates initial animation
+pieSeries.hiddenState.properties.opacity = 1;
+pieSeries.hiddenState.properties.endAngle = -90;
+pieSeries.hiddenState.properties.startAngle = -90;
+
+});
+
+    $('.mdl-spinner').removeClass('is-active');
+}
 
 //displaying submission languages
 
 function submissionLanguages(array,username){
-  $('#lanTitle').text('Languages of '+username);
 
   var ansi=0,java=0,cPlus=0,pascal=0, cPlus11=0;
   var chartData =[];
@@ -124,6 +191,9 @@ function submissionLanguages(array,username){
     chartData[2]={language: "C++",total: cPlus};
     chartData[3]={language: "Pascal",total: pascal};
     chartData[4]={language: "C++ 11",total: cPlus11};
+
+  $('#lans').removeClass('hide');
+  $('#lanTitle').text('Languages of '+username);
 
 am4core.ready(function() {
 
@@ -161,7 +231,6 @@ am4core.ready(function() {
 
 //displaying submitted verdics
 function verdict(array,username){
-  $('#verdictTitle').text('Verdicts of '+username);
 
     var SE=0,CE=0,RE=0,OL=0,TL=0,ML=0,WA=0,PE=0,Accepted=0;
     var chartData=[];
@@ -196,6 +265,11 @@ function verdict(array,username){
     chartData[6]={error: "Wrong Answer",total: WA};
     chartData[7]={error: "Presentation Error",total: PE};
     chartData[8]={error: "Accepted",total: Accepted};
+
+
+
+      $('#verdicts').removeClass('hide');
+      $('#verdictTitle').text('Verdicts of '+username);
 
 
     am4core.ready(function() {
@@ -241,39 +315,62 @@ $(document).ready(function(){
              $('.mdl-spinner').addClass('is-active');
              $('.card-heading').empty();
 
-              if( ! $('.mdl-grid').hasClass('hide')){
-                   $('.mdl-grid').addClass('hide');
-             }
-            if( ! $('.sharethis').hasClass('hide')){
+              if( ! $('#verdicts').hasClass('hide')){
+                   $('#verdicts').addClass('hide');
+               }
+
+              if( ! $('#lans').hasClass('hide')){
+                   $('#lans').addClass('hide');
+               }
+              if( ! $('#probsTag').hasClass('hide')){
+                   $('#probsTag').addClass('hide');
+               }
+
+               if( ! $('#unsolvedProbs').hasClass('hide')){
+                   $('#unsolvedProbs').addClass('hide');
+               }
+              if( ! $('#heatMapsContainer').hasClass('hide')){
+                   $('#heatMapsContainer').addClass('hide');
+               }
+               if( ! $('.sharethis').hasClass('hide')){
                    $('.sharethis').addClass('hide');
-             }
+               }
+
+
              $('#languageChart').empty();
              $('#verdictChart').empty();
-             $('#unsolvedProblems').empty();
+                $('#tagsChart').empty();
              $('#heatMapsContainer').empty();
+             $('#unsolvedProblems').empty();
+          
 
           //converting username to userId
           $.ajax(`https://uhunt.onlinejudge.org/api/uname2uid/${input_val}`).then(function(userId){ 
                
-
                if (userId <=0) {
     				        $("#input-div").addClass("is-invalid");
     				        $("#input-div").addClass("is-dirty");
                     $('.mdl-spinner').removeClass('is-active');
-                    $('.mdl-grid').addClass('hide')
 				        return;
 				      }
              
-               $('.mdl-spinner').removeClass('is-active');
-
               $.ajax(`https://uhunt.onlinejudge.org/api/subs-user/${userId}`).then(function(data){
                         
-                        $('.mdl-grid').removeClass('hide');
+                        if(data.subs.length <=0){
+                              $("#input-div").addClass("is-invalid");
+                              $("#input-div").addClass("is-dirty");
+                              $('.mdl-spinner').removeClass('is-active');
+                               return;
+                        }
+
                         submissionLanguages(data.subs,input_val);
                         verdict(data.subs,input_val);
+                        tagsOfProblems(data.subs,input_val);
                         unsolvedProblems(data.subs,userId);
                         displayHeatmaps(data.subs,input_val);
-                         $('.sharethis').removeClass('hide');
+
+                      $('.sharethis').removeClass('hide');
+                  
       
               })
 

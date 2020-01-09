@@ -19,7 +19,7 @@
       <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
     
 </head>
-<body>
+<body >
    
    <!-- header start -->
     <div class="layout mdl-layout mdl-js-layout mdl-layout--fixed-header has-drawer is-small-screen">
@@ -47,7 +47,7 @@
           <!-- header End -->
 
       <!--main content  start--> 
-        <main class="mdl-layout__content mdl-color--grey-100">
+        <main class="custom-scroll mdl-layout__content mdl-color--grey-100">
           <div class="mdl-grid-content">
          <!-- User Input Handler Start-->
             <div class="handle-card mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-cell--12-col-tablet">
@@ -68,8 +68,8 @@
                 </div>
           <!--Spinner end-->
           <!-- verdict and language presentation start-->
-          <div class="mdl-grid hide">
-             <div id="verdicts" class="t0-clear card mdl-shadow--2dp mdl-cell mdl-cell--6-col-desktop mdl-cell--12-col-tablet">
+          <div class="mdl-grid ">
+             <div id="verdicts" class="to-clear hide custom-scroll card mdl-shadow--2dp mdl-cell mdl-cell--6-col-desktop mdl-cell--12-col-tablet">
               <div class="vertical-space"></div>
                 <span id="verdictTitle" class="card-heading"></span>
                    <div id="verdictChart"></div>
@@ -77,7 +77,7 @@
               </div>
            
 
-             <div id="lans" class="to-clear card mdl-shadow--2dp mdl-cell mdl-cell--6-col-desktop mdl-cell--12-col-tablet">
+             <div id="lans" class="to-clear hide custom-scroll card mdl-shadow--2dp mdl-cell mdl-cell--6-col-desktop mdl-cell--12-col-tablet">
                <div class="vertical-space"></div>
            <span id="lanTitle" class="card-heading"></span>
                
@@ -88,9 +88,21 @@
           </div>
           <!-- verdict and language presentation end-->
 
+          <!-- Tags of problems chart start -->
+           <div class="mdl-grid ">
+               <div id="probsTag" class="hide custom-scroll card mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-cell--12-col-tablet">
+                <div class="vertical-space"></div>
+                <span id="tagsTitle" class="card-heading"></span>
+                <div class="vertical-space"></div>
+                 <div id="tagsChart"></div>
+              </div>
+           </div>
+
+           <!-- Tags of problems chart end -->
+
           <!-- unsolved problems start -->
-           <div class="mdl-grid hide">
-               <div id="unsolvedProbs" class="card mdl-shadow--2dp mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop  mdl-cell--12-col-tablet">
+           <div class="mdl-grid ">
+               <div id="unsolvedProbs" class="hide custom-scroll card mdl-shadow--2dp mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop  mdl-cell--12-col-tablet">
                 <span id="unsolvedTitle">Unsolved</span>
                 <div class="vertical-space"></div>
                  <div id="unsolvedProblems"></div>
@@ -99,8 +111,8 @@
 
            <!-- unsolved problems end -->
            <!-- HeatMaps Starts-->
-           <div class="mdl-grid hide">
-              <div  class="to-clear card mdl-shadow--2dp mdl-cell mdl-cell--12-col-desktop  mdl-cell--12-col-tablet" id="heatMapsContainer">
+           <div class="mdl-grid ">
+              <div  class="hide to-clear custom-scroll card mdl-shadow--2dp mdl-cell mdl-cell--12-col-desktop  mdl-cell--12-col-tablet" id="heatMapsContainer">
 
               </div>
            </div>
@@ -109,7 +121,7 @@
                <div class="share-div  mdl-cell mdl-cell--12-col">
                 <a class="sharethis hide" href="">share result</a>
                 <div class="vertical-space"></div>
-                  <p>Developed by <a href="https://facebook.com/tamim.rahman1">Ayubur</a></p>
+                  <p>Developed by <a href="https://facebook.com/tameem.rahman1">Ayubur</a></p>
               </div>
         </main>
         <!--main content  End-->
