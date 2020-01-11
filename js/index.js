@@ -1,3 +1,8 @@
+Number.prototype.round = function(p) {
+  p = p || 10;
+  return parseFloat( this.toFixed(p) );
+};
+
 
 ///HeatMap Implementation
 
@@ -62,10 +67,10 @@ function displayHeatmaps(array,username){
     Object.keys(years).reverse().forEach(function(key) {
            
        if(years[key]>=1){
-         $('#heatMapContent').append("<h6 class='heatmap-year'>"+key+"</h6>");
+         $('#heatMapContent').append("<h6 class='heatmap-year'>"+key +"  ( "+years[key]+" submissions)</h6>");
           $('#heatMapContent').append("<div class='heatmap-size' id='heatmap-"+key+"'></div>");
           $("#heatmap-"+key).calmosaic(data,{
-               lastYear: parseInt(key)+1,
+               lastYear: parseInt(key)+1
           });
        }
    });
@@ -165,6 +170,57 @@ pieSeries.hiddenState.properties.startAngle = -90;
 });
 
     $('.mdl-spinner').removeClass('is-active');
+}
+
+
+//overview table
+
+function overviewTable(array,username){
+
+  $('#overviewTable').removeClass('hide');
+  $('.handle-text').text(username);
+
+  var problems={},
+   max_count=-Infinity,
+   tried=0,
+   solve_one_sub=0,
+   total_submitted=0,
+   avg_attempt=0,
+   total_attempt=0,
+   max_attempt=null
+   solved_probs=[];
+
+  for(var i=0;i<array.length;i++){
+      problems[array[i][1]]= (problems[array[i][1]] || 0)+1;
+      if(array[i][2]==90 && !solved_probs.includes(array[i][1])){
+        solved_probs.push(array[i][1]);
+      }
+  }
+
+  for(var x in problems){
+    tried++;
+    if(problems[x] >max_count){
+       max_count=problems[x];
+       max_attempt=x;
+       total_attempt += problems[x];
+    }
+    if(problems[x]==1)
+      solve_one_sub++;
+      
+  }
+
+  $('#totalSubmitted').text(array.length);
+  $('#tried').text(tried);
+  $('#solved').text(solved_probs.length);
+  $('#unsolved').text(tried - solved_probs.length);
+  $('#averageAttempt').text((total_attempt/tried).round(2))
+  $.ajax(`https://uhunt.onlinejudge.org/api/p/id/${max_attempt}`).then(function(data){
+    $('#maxAttempt').empty();
+        $('#maxAttempt').append(max_count+" <a href='https://onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem="+max_attempt+"' target='_blank'> ("+data.num+")</a>")
+   })
+  $('#solvedWithOneSub').text(solve_one_sub+ " ("+((solve_one_sub *100)/tried).round(2)+"%)");
+
+  console.log(solved_probs);
 }
 
 //displaying submission languages
@@ -325,6 +381,9 @@ $(document).ready(function(){
               if( ! $('#probsTag').hasClass('hide')){
                    $('#probsTag').addClass('hide');
                }
+              if( ! $('#overviewTable').hasClass('hide')){
+                   $('#overviewTable').addClass('hide');
+               }
 
                if( ! $('#unsolvedProbs').hasClass('hide')){
                    $('#unsolvedProbs').addClass('hide');
@@ -336,6 +395,7 @@ $(document).ready(function(){
                    $('.sharethis').addClass('hide');
                }
 
+           
 
              $('#languageChart').empty();
              $('#verdictChart').empty();
@@ -366,6 +426,7 @@ $(document).ready(function(){
                         submissionLanguages(data.subs,input_val);
                         verdict(data.subs,input_val);
                         tagsOfProblems(data.subs,input_val);
+                        overviewTable(data.subs,input_val);
                         unsolvedProblems(data.subs,userId);
                         displayHeatmaps(data.subs,input_val);
 

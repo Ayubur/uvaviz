@@ -100,6 +100,55 @@
 
            <!-- Tags of problems chart end -->
 
+          <!-- Overview table start -->
+        <div class="mdl-grid">
+          
+          <div id="overviewTable" class="hide card mdl-cell mdl-cell--6-col-desktop mdl-cell--12-col-tablet" style="position: relative;">
+          <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" data-upgraded=",MaterialDataTable" style="width: 100%">
+            <thead>
+              <tr class="mdl-color--teal-300">
+                <th class="mdl-data-table__cell--non-numeric">Some numbers about</th>
+                <th class="handle-text">sakib</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="mdl-data-table__cell--non-numeric">Total Submission</td>
+                <td id="totalSubmitted"></td>
+              </tr>
+              <tr>
+                <td class="mdl-data-table__cell--non-numeric">Tried</td>
+                <td id="tried"></td>
+              </tr>
+              <tr>
+                <td class="mdl-data-table__cell--non-numeric">Solved</td>
+                <td id="solved" tabindex="0"></td>
+              </tr>
+              <tr>
+                <td class="mdl-data-table__cell--non-numeric">Unsolved</td>
+                <td id="unsolved" tabindex="0"></td>
+              </tr>
+              <tr>
+                <td class="mdl-data-table__cell--non-numeric">Average attempts</td>
+                <td id="averageAttempt" tabindex="0"></td>
+                
+              </tr>
+              <tr>
+                <td class="mdl-data-table__cell--non-numeric">Max attempts</td>
+                <td id="maxAttempt" tabindex="0"></td>
+                
+              </tr>
+              <tr>
+                <td class="mdl-data-table__cell--non-numeric">Solved with one submission</td>
+                <td id="solvedWithOneSub" tabindex="0"></td>
+                
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        </div>
+          <!-- Overview table end -->
+
           <!-- unsolved problems start -->
            <div class="mdl-grid ">
                <div id="unsolvedProbs" class="hide custom-scroll card mdl-shadow--2dp mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop  mdl-cell--12-col-tablet">
@@ -112,7 +161,7 @@
            <!-- unsolved problems end -->
            <!-- HeatMaps Starts-->
            <div class="mdl-grid ">
-              <div  class="hide to-clear custom-scroll card mdl-shadow--2dp mdl-cell mdl-cell--12-col-desktop  mdl-cell--12-col-tablet" id="heatMapsContainer">
+              <div  class="hide card mdl-shadow--2dp mdl-cell mdl-cell--12-col-desktop  mdl-cell--12-col-tablet" id="heatMapsContainer">
 
               </div>
            </div>
