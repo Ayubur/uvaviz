@@ -390,8 +390,8 @@ $(document).ready(function(){
                    $('#heatMapsContainer').addClass('hide');
                }
 
-               if( ! $('.sharethis').hasClass('hide');){
-                     $('.sharethis').addClass('hide');;
+               if( ! $('.sharethis').hasClass('hide')){
+                     $('.sharethis').addClass('hide');
                }
 
 
