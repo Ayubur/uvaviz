@@ -6,7 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>UVA Visualizer</title>
-       
+
+    <!-- Open grpah meta -->
+    <meta property="og:url" content="https://uvaviz.netlify.com">
+    <meta property="og:title" content="UVA Online Judge Visualizer">
+    <meta property="og:description" content="Visually analyze and compare UVA Online Judge user profiles">
+    <meta property="og:image" content="https://uvaviz.netlify.com/images/uva.png">
+    <meta property="fb:app_id" content="1368548573327999">
+
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="css/lib/material.cyan-light_blue.min.css">
     <link rel="stylesheet" href="css/lib/calmosaic/jquery.calmosaic.min.css">
@@ -20,6 +28,9 @@
     
 </head>
 <body >
+
+  <div id="fb-root"></div>
+
    
    <!-- header start -->
     <div class="layout mdl-layout mdl-js-layout mdl-layout--fixed-header has-drawer is-small-screen">
@@ -63,7 +74,7 @@
 
         <!-- User Input Handler End-->
         <!--Spinner start-->
-                <div class="spinner mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-cell--12-col-tablet">
+                <div class="spinner mdl-cell mdl-cell--12-col-desktop mdl-cell--12-col-tablet">
                       <div class="mdl-spinner mdl-js-spinner"></div>
                 </div>
           <!--Spinner end-->
@@ -90,7 +101,7 @@
 
           <!-- Tags of problems chart start -->
            <div class="mdl-grid ">
-               <div id="probsTag" class="hide custom-scroll card mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-cell--12-col-tablet">
+               <div id="probsTag" class="hide card mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-cell--12-col-tablet">
                 <div class="vertical-space"></div>
                 <span id="tagsTitle" class="card-heading"></span>
                 <div class="vertical-space"></div>
@@ -168,7 +179,10 @@
             <!-- HeatMaps ends-->
 
                <div class="share-div  mdl-cell mdl-cell--12-col">
-                <a class="sharethis hide" href="">share result</a>
+                <!-- <a class=" hide" href=""></a> -->
+                    <a  class="sharethis" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fuvaviz.netlify.com%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share Result</a>
+                <div class="vertical-space"></div>
+                <div class="fb-like" data-href="https://uvaviz.netlify.com" data-width="" data-layout="button_count" data-action="like" data-size="large" data-share="false"></div>
                 <div class="vertical-space"></div>
                   <p>Developed by <a href="https://facebook.com/tameem.rahman1">Ayubur</a></p>
               </div>
@@ -177,6 +191,8 @@
         
     </div>
     
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v5.0&appId=1368548573327999&autoLogAppEvents=1"></script>
+
     <script src="js/lib/jquery-3.4.1.min.js"></script>
     <script src="js/lib/moment.min.js"></script>
 <script src="js/lib/calmosaic/jquery.calmosaic.min.js"></script>
