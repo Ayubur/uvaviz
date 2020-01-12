@@ -389,11 +389,11 @@ $(document).ready(function(){
               if( ! $('#heatMapsContainer').hasClass('hide')){
                    $('#heatMapsContainer').addClass('hide');
                }
-               if( ! $('.sharethis').hasClass('hide')){
-                   $('.sharethis').addClass('hide');
+
+               if( ! $('.sharethis').hasClass('hide');){
+                     $('.sharethis').addClass('hide');;
                }
 
-           
 
              $('#languageChart').empty();
              $('#verdictChart').empty();
@@ -428,7 +428,9 @@ $(document).ready(function(){
                         unsolvedProblems(data.subs,userId);
                         displayHeatmaps(data.subs,input_val);
 
-                      $('.sharethis').removeClass('hide');
+                       // $('.fb-share-button').css('display','block');
+                      // $('.fb-like').removeClass('hide');
+                       $('.sharethis').removeClass('hide');
                   
       
               })
