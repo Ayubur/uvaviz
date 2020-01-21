@@ -33,9 +33,6 @@
     
 </head>
 <body >
-
-  <div id="fb-root"></div>
-
    
    <!-- header start -->
     <div class="layout mdl-layout mdl-js-layout mdl-layout--fixed-header has-drawer is-small-screen">
@@ -46,7 +43,6 @@
               <nav class="mdl-navigation mdl-layout--large-screen-only">
                 <a href="index.html" class="mdl-button mdl-js-button mdl-js-ripple-effect" data-upgraded=",MaterialButton,MaterialRipple"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i> Home <span class="mdl-ripple"></span><span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></a>
                 <a href="compare.html" class="mdl-button mdl-js-button mdl-js-ripple-effect" data-upgraded=",MaterialButton,MaterialRipple"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">compare</i> Compare<span class="mdl-ripple"></span><span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></a>
-                <a href="" class="mdl-button mdl-js-button mdl-js-ripple-effect" data-upgraded=",MaterialButton,MaterialRipple"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">trending_up</i> Virtual Rating Change<span class="mdl-ripple"></span><span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></a>
                 <a href="about.html" class="mdl-button mdl-js-button mdl-js-ripple-effect" data-upgraded=",MaterialButton,MaterialRipple"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">feedback</i> Say something<span class="mdl-ripple"></span><span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></a>
               </nav>
             </div>
@@ -56,7 +52,6 @@
             <nav class="navigation mdl-navigation">
               <a href="index.html" class="mdl-navigation__link"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i> Home </a>
               <a href="compare.html" class="mdl-navigation__link"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">compare</i> Compare</a>
-              <a href="" class="mdl-navigation__link"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">trending_up</i>Virtual Rating Change</a>
               <a href="about.html" class="mdl-navigation__link"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">feedback</i> Say something </a>
             </nav>
           </div>
@@ -93,22 +88,12 @@
           <!--Spinner end-->
         <!-- verdict  start-->
           <div class="mdl-grid hide" id="verdictsContainer">
-             <div id="verdicts1" class="to-clear card mdl-shadow--2dp mdl-cell mdl-cell--6-col-desktop mdl-cell--6-col-tablet">
+            <div id="verdicts" class="card mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-cell--12-col-tablet">
               <div class="vertical-space"></div>
-                <span id="verdictTitle1" class="card-heading"></span>
-                   <div id="verdictChart1"></div>
- 
+                  <span id="verdictTitle" class="card-heading">Verdicts</span>
+                  <div class="vertical-space"></div>
+                   <div id="verdictChart"></div>
               </div>
-           
-
-             <div id="verdicts2" class="to-clear card mdl-shadow--2dp mdl-cell mdl-cell--6-col-desktop mdl-cell--6-col-tablet">
-               <div class="vertical-space"></div>
-                  <span id="verdictTitle2" class="card-heading"></span>
-               
-                   <div id="verdictChart2"></div>
- 
-              </div>
-
           </div>
           <!-- verdict  end-->
 
@@ -120,83 +105,47 @@
             <thead>
               <tr class="mdl-color--teal-300">
                 <th class="mdl-data-table__cell--non-numeric">Some numbers about</th>
-                <th class="handle-text1"></th>
+                <th id="user1"></th>
+                <th id="user2"></th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td class="mdl-data-table__cell--non-numeric">Total Submission</td>
                 <td id="totalSubmitted1"></td>
-              </tr>
-              <tr>
-                <td class="mdl-data-table__cell--non-numeric">Tried</td>
-                <td id="tried1"></td>
-              </tr>
-              <tr>
-                <td class="mdl-data-table__cell--non-numeric">Solved</td>
-                <td id="solved1" tabindex="0"></td>
-              </tr>
-              <tr>
-                <td class="mdl-data-table__cell--non-numeric">Unsolved</td>
-                <td id="unsolved1" tabindex="0"></td>
-              </tr>
-              <tr>
-                <td class="mdl-data-table__cell--non-numeric">Average attempts</td>
-                <td id="averageAttempt1" tabindex="0"></td>
-                
-              </tr>
-              <tr>
-                <td class="mdl-data-table__cell--non-numeric">Max attempts</td>
-                <td id="maxAttempt1" tabindex="0"></td>
-                
-              </tr>
-              <tr>
-                <td class="mdl-data-table__cell--non-numeric">Solved with one submission</td>
-                <td id="solvedWithOneSub1" tabindex="0"></td>
-                
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div id="overviewTable2" class="card mdl-cell mdl-cell--6-col-desktop mdl-cell--6-col-tablet">
-          <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" data-upgraded=",MaterialDataTable" style="width: 100%">
-            <thead>
-              <tr class="mdl-color--teal-300">
-                <th class="mdl-data-table__cell--non-numeric">Some numbers about</th>
-                <th class="handle-text2"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="mdl-data-table__cell--non-numeric">Total Submission</td>
                 <td id="totalSubmitted2"></td>
               </tr>
               <tr>
                 <td class="mdl-data-table__cell--non-numeric">Tried</td>
-                <td id="tried2"></td>
+                <td id="tried1"></td>
+                 <td id="tried2"></td>
               </tr>
               <tr>
                 <td class="mdl-data-table__cell--non-numeric">Solved</td>
-                <td id="solved2" tabindex="0"></td>
+                <td id="solved1" tabindex="0"></td>
+                  <td id="solved2" tabindex="0"></td>
               </tr>
               <tr>
                 <td class="mdl-data-table__cell--non-numeric">Unsolved</td>
+                <td id="unsolved1" tabindex="0"></td>
                 <td id="unsolved2" tabindex="0"></td>
               </tr>
               <tr>
                 <td class="mdl-data-table__cell--non-numeric">Average attempts</td>
+                <td id="averageAttempt1" tabindex="0"></td>
                 <td id="averageAttempt2" tabindex="0"></td>
                 
               </tr>
               <tr>
                 <td class="mdl-data-table__cell--non-numeric">Max attempts</td>
+                <td id="maxAttempt1" tabindex="0"></td>
                 <td id="maxAttempt2" tabindex="0"></td>
                 
               </tr>
               <tr>
                 <td class="mdl-data-table__cell--non-numeric">Solved with one submission</td>
-                <td id="solvedWithOneSub2" tabindex="0"></td>
+                <td id="solvedWithOneSub1" tabindex="0"></td>
+                  <td id="solvedWithOneSub2" tabindex="0"></td>
                 
               </tr>
             </tbody>
