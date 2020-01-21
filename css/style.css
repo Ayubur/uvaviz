@@ -81,9 +81,7 @@ a{
 }
 
 /** Spinner CSS  **/
-.spinner{
-    text-align: center;
-}
+
 
 /** NOTE - spinner size is multiple of 28 **/
 .mdl-spinner {
@@ -91,6 +89,9 @@ a{
   height: 56px;
   position: fixed;
   top: 50%;
+  left: 45%;
+z-index: 9999999999;
+
 }
 
 .mdl-spinner__circle {

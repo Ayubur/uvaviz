@@ -64,58 +64,33 @@
 
       <!--main content  start--> 
         <main class="custom-scroll mdl-layout__content mdl-color--grey-100">
-          
-         <!-- User Input Handler Start-->
-         <div>
+        <!-- User Input Handler start-->
+        <div class="mdl-grid content">
             <div class="handle-card mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-cell--12-col-tablet">
-                <form action="" id="handleform">
-                  <div id="input-div" class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" type="text" name="handle" id="handle">
-                    <label class="mdl-textfield__label" for="handle">UVA User Handle</label>
-                    <span id="handleDivErr" class="mdl-textfield__error">Couldn't find user. Network problem?</span>
-                  </div>
-                </form>
+            <form action="" id="handleform">
+              <div class="mdl-textfield mdl-js-textfield" id="handle1Div">
+                <input type="text" class="mdl-textfield__input" name="handle1" id="handle1">
+                <label class="mdl-textfield__label" for="handle1">Handle 1</label>
+                <span id="handle1DivErr" class="mdl-textfield__error"></span>
               </div>
-          <div>
+              <div class="mdl-textfield mdl-js-textfield" id="handle2Div">
+                <input type="text" class="mdl-textfield__input" name="handle2" id="handle2">
+                <label class="mdl-textfield__label" for="handle2">Handle 2</label>
+                <span id="handle2DivErr" class="mdl-textfield__error"></span>
+              </div>
+              <br>
+              <button id="submitButton" type="submit" class="mdl-button mdl-button--raised mdl-js-button" data-upgraded=",MaterialButton">Compare</button>
+            </form>
+          </div>
+        </div>
 
         <!-- User Input Handler End-->
+
         <!--Spinner start-->
                 <div class="spinner mdl-cell mdl-cell--12-col-desktop mdl-cell--12-col-tablet">
                       <div class="mdl-spinner mdl-js-spinner"></div>
                 </div>
           <!--Spinner end-->
-          <!-- verdict and language presentation start-->
-          <div class="mdl-grid ">
-             <div id="verdicts" class="to-clear hide custom-scroll card mdl-shadow--2dp mdl-cell mdl-cell--6-col-desktop mdl-cell--12-col-tablet">
-              <div class="vertical-space"></div>
-                <span id="verdictTitle" class="card-heading"></span>
-                   <div id="verdictChart"></div>
- 
-              </div>
-           
-
-             <div id="lans" class="to-clear hide custom-scroll card mdl-shadow--2dp mdl-cell mdl-cell--6-col-desktop mdl-cell--12-col-tablet">
-               <div class="vertical-space"></div>
-           <span id="lanTitle" class="card-heading"></span>
-               
-                   <div id="languageChart"></div>
- 
-              </div>
-
-          </div>
-          <!-- verdict and language presentation end-->
-
-          <!-- Tags of problems chart start -->
-           <div class="mdl-grid ">
-               <div id="probsTag" class="hide card mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-cell--12-col-tablet">
-                <div class="vertical-space"></div>
-                <span id="tagsTitle" class="card-heading"></span>
-                <div class="vertical-space"></div>
-                 <div id="tagsChart"></div>
-              </div>
-           </div>
-
-           <!-- Tags of problems chart end -->
 
           <!-- Overview table start -->
         <div class="mdl-grid">
@@ -166,23 +141,6 @@
         </div>
           <!-- Overview table end -->
 
-          <!-- unsolved problems start -->
-           <div class="mdl-grid ">
-               <div id="unsolvedProbs" class="hide custom-scroll card mdl-shadow--2dp mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop  mdl-cell--12-col-tablet">
-                <span id="unsolvedTitle">Unsolved</span>
-                <div class="vertical-space"></div>
-                 <div id="unsolvedProblems"></div>
-              </div>
-           </div>
-
-           <!-- unsolved problems end -->
-           <!-- HeatMaps Starts-->
-           <div class="mdl-grid ">
-              <div  class="hide card mdl-shadow--2dp mdl-cell mdl-cell--12-col-desktop  mdl-cell--12-col-tablet" id="heatMapsContainer">
-
-              </div>
-           </div>
-            <!-- HeatMaps ends-->
 
                <div class="share-div mdl-cell mdl-cell--12-col">
                <a class="sharethis hide" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fuvaviz.netlify.com%2Findex.html&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share Result</a>
@@ -203,6 +161,6 @@
 <script src="js/lib/calmosaic/jquery.calmosaic.min.js"></script>
  
 
- <script src="js/index.js"></script>
+ <script src="js/compare.js"></script>
 </body>
 </html>

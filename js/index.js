@@ -144,7 +144,7 @@ am4core.useTheme(am4themes_animated);
 // Create chart instance
 var chart = am4core.create("tagsChart", am4charts.PieChart);
 chart.legend = new am4charts.Legend();
-chart.legend.position="right";
+chart.legend.position="bottom";
 
 // Add data
 chart.data = chartData;
@@ -366,6 +366,15 @@ $(document).ready(function(){
         if(e.keyCode==13){
             e.preventDefault();
             var input_val = $(this).val();
+
+           $('#handleDivErr').text("Couldn't find user. Network problem?");
+           if(input_val==''){
+                   $("#input-div").addClass("is-invalid");
+                   $("#input-div").addClass("is-dirty");
+                   $('#handleDivErr').text('Enter a username');
+                   return;
+              }
+
              $('.mdl-spinner').addClass('is-active');
              $('.card-heading').empty();
 
@@ -417,6 +426,8 @@ $(document).ready(function(){
                         if(data.subs.length <=0){
                               $("#input-div").addClass("is-invalid");
                               $("#input-div").addClass("is-dirty");
+                            $('#handleDivErr').text("No data found for this user");
+
                               $('.mdl-spinner').removeClass('is-active');
                                return;
                         }
