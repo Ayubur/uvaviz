@@ -100,6 +100,21 @@ z-index: 9999999999;
 
 
 
+
+/** chart css  for compare two user**/
+#verdictChart1{
+    height: 400px;
+    width: 100%;
+}
+
+#verdictChart2{
+    height: 400px;
+    width: 100%;
+}
+
+
+
+
 /** chart css **/
 #verdictChart{
     height: 400px;

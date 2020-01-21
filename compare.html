@@ -91,48 +91,112 @@
                       <div class="mdl-spinner mdl-js-spinner"></div>
                 </div>
           <!--Spinner end-->
+        <!-- verdict  start-->
+          <div class="mdl-grid hide" id="verdictsContainer">
+             <div id="verdicts1" class="to-clear card mdl-shadow--2dp mdl-cell mdl-cell--6-col-desktop mdl-cell--6-col-tablet">
+              <div class="vertical-space"></div>
+                <span id="verdictTitle1" class="card-heading"></span>
+                   <div id="verdictChart1"></div>
+ 
+              </div>
+           
+
+             <div id="verdicts2" class="to-clear card mdl-shadow--2dp mdl-cell mdl-cell--6-col-desktop mdl-cell--6-col-tablet">
+               <div class="vertical-space"></div>
+                  <span id="verdictTitle2" class="card-heading"></span>
+               
+                   <div id="verdictChart2"></div>
+ 
+              </div>
+
+          </div>
+          <!-- verdict  end-->
 
           <!-- Overview table start -->
-        <div class="mdl-grid">
+        <div class="mdl-grid hide" id="overviewTableContainer">
           
-          <div id="overviewTable" class="hide card mdl-cell mdl-cell--6-col-desktop mdl-cell--12-col-tablet" style="position: relative;">
+          <div id="overviewTable1" class="card mdl-cell mdl-cell--6-col-desktop mdl-cell--6-col-tablet">
           <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" data-upgraded=",MaterialDataTable" style="width: 100%">
             <thead>
               <tr class="mdl-color--teal-300">
                 <th class="mdl-data-table__cell--non-numeric">Some numbers about</th>
-                <th class="handle-text">sakib</th>
+                <th class="handle-text1"></th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td class="mdl-data-table__cell--non-numeric">Total Submission</td>
-                <td id="totalSubmitted"></td>
+                <td id="totalSubmitted1"></td>
               </tr>
               <tr>
                 <td class="mdl-data-table__cell--non-numeric">Tried</td>
-                <td id="tried"></td>
+                <td id="tried1"></td>
               </tr>
               <tr>
                 <td class="mdl-data-table__cell--non-numeric">Solved</td>
-                <td id="solved" tabindex="0"></td>
+                <td id="solved1" tabindex="0"></td>
               </tr>
               <tr>
                 <td class="mdl-data-table__cell--non-numeric">Unsolved</td>
-                <td id="unsolved" tabindex="0"></td>
+                <td id="unsolved1" tabindex="0"></td>
               </tr>
               <tr>
                 <td class="mdl-data-table__cell--non-numeric">Average attempts</td>
-                <td id="averageAttempt" tabindex="0"></td>
+                <td id="averageAttempt1" tabindex="0"></td>
                 
               </tr>
               <tr>
                 <td class="mdl-data-table__cell--non-numeric">Max attempts</td>
-                <td id="maxAttempt" tabindex="0"></td>
+                <td id="maxAttempt1" tabindex="0"></td>
                 
               </tr>
               <tr>
                 <td class="mdl-data-table__cell--non-numeric">Solved with one submission</td>
-                <td id="solvedWithOneSub" tabindex="0"></td>
+                <td id="solvedWithOneSub1" tabindex="0"></td>
+                
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div id="overviewTable2" class="card mdl-cell mdl-cell--6-col-desktop mdl-cell--6-col-tablet">
+          <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" data-upgraded=",MaterialDataTable" style="width: 100%">
+            <thead>
+              <tr class="mdl-color--teal-300">
+                <th class="mdl-data-table__cell--non-numeric">Some numbers about</th>
+                <th class="handle-text2"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="mdl-data-table__cell--non-numeric">Total Submission</td>
+                <td id="totalSubmitted2"></td>
+              </tr>
+              <tr>
+                <td class="mdl-data-table__cell--non-numeric">Tried</td>
+                <td id="tried2"></td>
+              </tr>
+              <tr>
+                <td class="mdl-data-table__cell--non-numeric">Solved</td>
+                <td id="solved2" tabindex="0"></td>
+              </tr>
+              <tr>
+                <td class="mdl-data-table__cell--non-numeric">Unsolved</td>
+                <td id="unsolved2" tabindex="0"></td>
+              </tr>
+              <tr>
+                <td class="mdl-data-table__cell--non-numeric">Average attempts</td>
+                <td id="averageAttempt2" tabindex="0"></td>
+                
+              </tr>
+              <tr>
+                <td class="mdl-data-table__cell--non-numeric">Max attempts</td>
+                <td id="maxAttempt2" tabindex="0"></td>
+                
+              </tr>
+              <tr>
+                <td class="mdl-data-table__cell--non-numeric">Solved with one submission</td>
+                <td id="solvedWithOneSub2" tabindex="0"></td>
                 
               </tr>
             </tbody>
