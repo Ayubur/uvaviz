@@ -6,129 +6,9 @@ Number.prototype.round = function(p) {
 
 
 
-//submitted verdics for first handler
-function verdict1(array,username){
-
-    var SE=0,CE=0,RE=0,OL=0,TL=0,ML=0,WA=0,PE=0,Accepted=0;
-    var chartData=[];
-
-       for(var i=0;i<array.length;i++){
-        if(array[i][2]==10)
-              SE++;
-        else if(array[i][2]==30)
-              CE++;
-        else if(array[i][2]==40)
-              RE++;
-       else if(array[i][2]==45)
-              OL++;
-       else if(array[i][2]==50)
-              TL++;
-       else if(array[i][2]==60)
-              ML++;
-       else if(array[i][2]==70)
-              WA++;
-       else if(array[i][2]==80)
-              PE++;
-       else
-        Accepted++;
-    }
-
-    chartData[0]={error: "Submission Error",total: SE};
-    chartData[1]={error: "Compiler Error",total: CE};
-    chartData[2]={error: "Runtime Error",total: RE};
-    chartData[3]={error: "Output Limit",total: OL};
-    chartData[4]={error: "Time Limit",total: TL};
-    chartData[5]={error: "Memory Limit",total: ML};
-    chartData[6]={error: "Wrong Answer",total: WA};
-    chartData[7]={error: "Presentation Error",total: PE};
-    chartData[8]={error: "Accepted",total: Accepted};
-
-
-      $('#verdictTitle1').text('Verdicts of '+username);
-
-
-    am4core.ready(function() {
-
-          // Themes begin
-          am4core.useTheme(am4themes_animated);
-          // Themes end
-
-          var chart = am4core.create("verdictChart1", am4charts.PieChart3D);
-          chart.hiddenState.properties.opacity = 0;
-          chart.data = chartData ;
-
-          var series = chart.series.push(new am4charts.PieSeries3D());
-          //series.labels.template.disabled = true;
-          series.ticks.template.disabled = true;
-          series.labels.template.text = "{category}";
-          series.labels.template.radius = am4core.percent(-80);
-          series.alignLabels = false;
-         series.labels.template.fill = am4core.color("white");
-          series.labels.template.relativeRotation = 90;
-          series.dataFields.value = "total";
-          series.dataFields.depthValue = "total";
-          series.dataFields.category = "error";
-          series.slices.template.cornerRadius = 8;
-          series.colors.step = 3;
-          series.labels.template.adapter.add("hidden",(hidden, target)=>{
-            return target.dataItem.values.value.percent < 5 ? true : false;
-          });
-
-    })
-}
-
-
-//overview table for first handler
-
-function overviewTable1(array,username){
-
-  $('#user1').text(username);
-
-  var problems={},
-   max_count=-Infinity,
-   tried=0,
-   solve_one_sub=0,
-   total_submitted=0,
-   avg_attempt=0,
-   total_attempt=0,
-   max_attempt=null
-   solved_probs=[];
-
-  for(var i=0;i<array.length;i++){
-      problems[array[i][1]]= (problems[array[i][1]] || 0)+1;
-      if(array[i][2]==90 && !solved_probs.includes(array[i][1])){
-        solved_probs.push(array[i][1]);
-      }
-  }
-
-  for(var x in problems){
-    tried++;
-    if(problems[x] >max_count){
-       max_count=problems[x];
-       max_attempt=x;
-       total_attempt += problems[x];
-    }
-    if(problems[x]==1)
-      solve_one_sub++;
-      
-  }
-
-  $('#totalSubmitted1').text(array.length);
-  $('#tried1').text(tried);
-  $('#solved1').text(solved_probs.length);
-  $('#unsolved1').text(tried - solved_probs.length);
-  $('#averageAttempt1').text((tried/total_attempt).round(2))
-  $.ajax(`https://uhunt.onlinejudge.org/api/p/id/${max_attempt}`).then(function(data){
-    $('#maxAttempt1').empty();
-        $('#maxAttempt1').append(max_count+" <a href='https://onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem="+max_attempt+"' target='_blank'> ("+data.num+")</a>")
-   })
-  $('#solvedWithOneSub1').text(solve_one_sub+ " ("+((solve_one_sub *100)/tried).round(2)+"%)");
-}
-
-
 //verdicts pie chart
 
-function verdictsPieChart(array1,array2,user1,user2){
+function verdictsBarChart(array1,array2,user1,user2){
 
     
  var SE1=0,CE1=0,RE1=0,OL1=0,TL1=0,ML1=0,WA1=0,PE1=0,Accepted1=0,
@@ -189,9 +69,7 @@ function verdictsPieChart(array1,array2,user1,user2){
     chartData[7]={'error': "Presentation Error",user1: PE1,user2:PE2};
     chartData[8]={'error': "Accepted",user1: Accepted1,user2:Accepted2};
 
-    console.log(chartData);
-
-     am4core.ready(function() {
+am4core.ready(function() {
 
 // Themes begin
 am4core.useTheme(am4themes_animated);
@@ -202,6 +80,7 @@ var chart = am4core.create("verdictChart", am4charts.XYChart);
 
 // Add data
 chart.data = chartData;
+
 
 // Create axes
 var categorxAxis = chart.xAxes.push(new am4charts.CategoryAxis());
@@ -241,83 +120,107 @@ function createSeries(field, name) {
 
 createSeries("user1", user1);
 createSeries("user2", user2);
+chart.invalidateData();
 
 }); 
 
 
 }
 
+//submission languages
 
-//submitted verdics for second handler
-function verdict2(array,username){
+function languagesBarChar(array1,array2,user1,user2){
 
-    var SE=0,CE=0,RE=0,OL=0,TL=0,ML=0,WA=0,PE=0,Accepted=0;
-    var chartData=[];
-
-       for(var i=0;i<array.length;i++){
-        if(array[i][2]==10)
-              SE++;
-        else if(array[i][2]==30)
-              CE++;
-        else if(array[i][2]==40)
-              RE++;
-       else if(array[i][2]==45)
-              OL++;
-       else if(array[i][2]==50)
-              TL++;
-       else if(array[i][2]==60)
-              ML++;
-       else if(array[i][2]==70)
-              WA++;
-       else if(array[i][2]==80)
-              PE++;
+  var ansi1=0,java1=0,cPlus1=0,pascal1=0, cPlus111=0,
+  ansi2=0,java2=0,cPlus2=0,pascal2=0, cPlus112=0;
+  var chartData =[];
+   for(var i=0;i<array1.length;i++){
+        if(array1[i][5]==1)
+              ansi1++;
+        else if(array1[i][5]==2)
+              java1++;
+        else if(array1[i][5]==3)
+              cPlus1++;
+       else if(array1[i][5]==4)
+              pascal1++;
        else
-        Accepted++;
+        cPlus111++;
     }
 
-    chartData[0]={error: "Submission Error",total: SE};
-    chartData[1]={error: "Compiler Error",total: CE};
-    chartData[2]={error: "Runtime Error",total: RE};
-    chartData[3]={error: "Output Limit",total: OL};
-    chartData[4]={error: "Time Limit",total: TL};
-    chartData[5]={error: "Memory Limit",total: ML};
-    chartData[6]={error: "Wrong Answer",total: WA};
-    chartData[7]={error: "Presentation Error",total: PE};
-    chartData[8]={error: "Accepted",total: Accepted};
+  for(var i=0;i<array2.length;i++){
+        if(array2[i][5]==1)
+              ansi2++;
+        else if(array2[i][5]==2)
+              java2++;
+        else if(array2[i][5]==3)
+              cPlus2++;
+       else if(array2[i][5]==4)
+              pascal2++;
+       else
+        cPlus112++;
+    }
 
+    chartData[0]={language: "ANSI C",user1:ansi1,user2:ansi2};
+    chartData[1]={language: "JAVA",user1:java1,user2:java2};
+    chartData[2]={language: "C++",user1:cPlus1,user2:cPlus2};
+    chartData[3]={language: "Pascal",user1:pascal1,user2:pascal2};
+    chartData[4]={language: "C++ 11",user1:cPlus111,user2:cPlus112};
 
-      $('#verdictTitle2').text('Verdicts of '+username);
+am4core.ready(function() {
 
+// Themes begin
+am4core.useTheme(am4themes_animated);
+// Themes end
 
-    am4core.ready(function() {
+ // Create chart instance
+var chart = am4core.create("lanChart", am4charts.XYChart);
 
-          // Themes begin
-          am4core.useTheme(am4themes_animated);
-          // Themes end
+// Add data
+chart.data = chartData;
 
-          var chart = am4core.create("verdictChart2", am4charts.PieChart3D);
-          chart.hiddenState.properties.opacity = 0;
-          chart.data = chartData ;
+// Create axes
+var categorxAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+categorxAxis.dataFields.category = "language";
+categorxAxis.numberFormatter.numberFormat = "#";
+categorxAxis.renderer.grid.template.location = 0;
+categorxAxis.renderer.cellStartLocation = 0.1;
+categorxAxis.renderer.cellEndLocation = 0.9;
 
-          var series = chart.series.push(new am4charts.PieSeries3D());
-          //series.labels.template.disabled = true;
-          series.ticks.template.disabled = true;
-          series.labels.template.text = "{category}";
-          series.labels.template.radius = am4core.percent(-80);
-          series.alignLabels = false;
-         series.labels.template.fill = am4core.color("white");
-          series.labels.template.relativeRotation = 90;
-          series.dataFields.value = "total";
-          series.dataFields.depthValue = "total";
-          series.dataFields.category = "error";
-          series.slices.template.cornerRadius = 8;
-          series.colors.step = 3;
-          series.labels.template.adapter.add("hidden",(hidden, target)=>{
-            return target.dataItem.values.value.percent < 5 ? true : false;
-          });
+var  valueAxis = chart.yAxes.push(new am4charts.ValueAxis()); 
 
-    })
+// Create series
+function createSeries(field, name) {
+  var series = chart.series.push(new am4charts.ColumnSeries());
+  series.dataFields.valueY = field;
+  series.dataFields.categoryX = "language";
+  series.name = name;
+  series.columns.template.tooltipText = "{name}: [bold]{valueY}[/]";
+  series.columns.template.height = am4core.percent(100);
+  series.sequencedInterpolation = true;
+
+  var valueLabel = series.bullets.push(new am4charts.LabelBullet());
+  // valueLabel.label.text = "{valueY}";
+  // valueLabel.label.horizontalCenter = "left";
+  valueLabel.label.dx = 10;
+  valueLabel.label.hideOversized = false;
+  valueLabel.label.truncate = false;
+
+  var categoryLabel = series.bullets.push(new am4charts.LabelBullet());
+  // categoryLabel.label.text = "{name}";
+  // categoryLabel.label.horizontalCenter = "right";
+  categoryLabel.label.dx = -10;
+  categoryLabel.label.fill = am4core.color("#fff");
+  categoryLabel.label.hideOversized = true;
+  categoryLabel.label.truncate = false;
 }
+
+createSeries("user1", user1);
+createSeries("user2", user2);
+
+});
+
+}
+
 
 //Overview Table 
 
@@ -414,54 +317,6 @@ $('#user2').text(user2);
 
 
 
-//overview table for second handler
-
-function overviewTable2(array,username){
-
-  $('#user2').text(username);
-
-  var problems={},
-   max_count=-Infinity,
-   tried=0,
-   solve_one_sub=0,
-   total_submitted=0,
-   avg_attempt=0,
-   total_attempt=0,
-   max_attempt=null
-   solved_probs=[];
-
-  for(var i=0;i<array.length;i++){
-      problems[array[i][1]]= (problems[array[i][1]] || 0)+1;
-      if(array[i][2]==90 && !solved_probs.includes(array[i][1])){
-        solved_probs.push(array[i][1]);
-      }
-  }
-
-  for(var x in problems){
-    tried++;
-    if(problems[x] >max_count){
-       max_count=problems[x];
-       max_attempt=x;
-       total_attempt += problems[x];
-    }
-    if(problems[x]==1)
-      solve_one_sub++;
-      
-  }
-
-  $('#totalSubmitted2').text(array.length);
-  $('#tried2').text(tried);
-  $('#solved2').text(solved_probs.length);
-  $('#unsolved2').text(tried - solved_probs.length);
-  $('#averageAttempt2').text((tried/total_attempt).round(2))
-  $.ajax(`https://uhunt.onlinejudge.org/api/p/id/${max_attempt}`).then(function(data){
-    $('#maxAttempt2').empty();
-        $('#maxAttempt2').append(max_count+" <a href='https://onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem="+max_attempt+"' target='_blank'> ("+data.num+")</a>")
-   })
-  $('#solvedWithOneSub2').text(solve_one_sub+ " ("+((solve_one_sub *100)/tried).round(2)+"%)");
-}
-
-
 
 //  Main Functions
 
@@ -471,6 +326,9 @@ $(document).ready(function(){
      
      $('#submitButton').on('click',async(e)=>{
             e.preventDefault();
+
+            am4core.disposeAllCharts();
+
 
           $('#verdictChart').empty();
            
@@ -498,6 +356,9 @@ $(document).ready(function(){
           if( ! $('#verdictsContainer').hasClass('hide')){
                    $('#verdictsContainer').addClass('hide');
            }
+          if( ! $('#lansContainer').hasClass('hide')){
+                   $('#lansContainer').addClass('hide');
+           }
           if( ! $('#overviewTableContainer').hasClass('hide')){
                    $('#overviewTableContainer').addClass('hide');
            }
@@ -506,6 +367,7 @@ $(document).ready(function(){
 
       $.ajax(`https://uhunt.onlinejudge.org/api/uname2uid/${handle1}`).then(function(userId){
             if (userId <=0) {
+              
                     $("#handle1Div").addClass("is-invalid");
                     $("#handle1Div").addClass("is-dirty");
                     $('.mdl-spinner').removeClass('is-active');
@@ -515,6 +377,7 @@ $(document).ready(function(){
           $.ajax(`https://uhunt.onlinejudge.org/api/subs-user/${userId}`).then(function(data1){
                   
                   if(data1.subs.length <=0){
+
                                $("#handle1Div").addClass("is-invalid");
                               $("#handle1Div").addClass("is-dirty");
                               $('#handle1DivErr').text("No data found for this user");
@@ -541,11 +404,13 @@ $(document).ready(function(){
                                return;
                               }
 
-                              verdictsPieChart(data1.subs,data2.subs,handle1,handle2);
+                              verdictsBarChart(data1.subs,data2.subs,handle1,handle2);
+                              languagesBarChar(data1.subs,data2.subs,handle1,handle2);
                               overviewTable(data1.subs,data2.subs,handle1,handle2);
 
 
                                $('#verdictsContainer').removeClass('hide');
+                               $('#lansContainer').removeClass('hide');
                                $('#overviewTableContainer').removeClass('hide');
 
                                $('.mdl-spinner').removeClass('is-active');

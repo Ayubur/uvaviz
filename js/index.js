@@ -8,23 +8,6 @@ Number.prototype.round = function(p) {
 
 
 function dateConverter(timestamps){
-  // var obj ={};
-
-  // var a = new Date(timestamps * 1000);
-  // var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  // var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-  // var year = a.getFullYear();
-  // var dayName = days[a.getDay()];
-  // var month = a.getMonth()+1;
-  // var date = a.getDate();
-  // // var hour = a.getHours();
-  // // var min = a.getMinutes();
-  // // var sec = a.getSeconds();
-  // // var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
-  // var fullDate= year+"-"+month+"-"+date;
-  
-  // return fullDate;
 
     var d = new Date(timestamps*1000);
         month = '' + (d.getMonth() + 1);
@@ -60,7 +43,7 @@ function displayHeatmaps(array,username){
     })
 
      $('#heatMapsContainer').removeClass('hide');
-   $('#heatMapsContainer').append("<span class='card-heading'>Submissions of "+username+"</span>");
+     $('#heatMapsContainer').append("<span class='card-heading'>Submissions of "+username+"</span>");
       $('#heatMapsContainer').append("<div id='heatMapContent'></div>");
 
 
@@ -364,7 +347,10 @@ function verdict(array,username){
 $(document).ready(function(){
     $('#handle').on('keydown', function(e){
         if(e.keyCode==13){
-            e.preventDefault();
+             e.preventDefault();
+
+             am4core.disposeAllCharts();
+
             var input_val = $(this).val();
 
            $('#handleDivErr').text("Couldn't find user. Network problem?");
@@ -439,9 +425,7 @@ $(document).ready(function(){
                         unsolvedProblems(data.subs,userId);
                         displayHeatmaps(data.subs,input_val);
 
-                       // $('.fb-share-button').css('display','block');
-                      // $('.fb-like').removeClass('hide');
-                       $('.sharethis').removeClass('hide');
+                         $('.sharethis').removeClass('hide');
                   
       
               })
