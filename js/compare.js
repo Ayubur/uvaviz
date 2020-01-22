@@ -77,6 +77,8 @@ am4core.useTheme(am4themes_animated);
 
  // Create chart instance
 var chart = am4core.create("verdictChart", am4charts.XYChart);
+chart.legend = new am4charts.Legend();
+chart.legend.position="top";
 
 // Add data
 chart.data = chartData;
@@ -89,10 +91,14 @@ categorxAxis.numberFormatter.numberFormat = "#";
 categorxAxis.renderer.grid.template.location = 0;
 categorxAxis.renderer.cellStartLocation = 0.1;
 categorxAxis.renderer.cellEndLocation = 0.9;
+categorxAxis.renderer.labels.template.wrap=true;
+categorxAxis.renderer.labels.template.maxWidth=100;
+
 
 var  valueAxis = chart.yAxes.push(new am4charts.ValueAxis()); 
 
-// Create series
+
+//Create series
 function createSeries(field, name) {
   var series = chart.series.push(new am4charts.ColumnSeries());
   series.dataFields.valueY = field;
@@ -103,24 +109,23 @@ function createSeries(field, name) {
   series.sequencedInterpolation = true;
 
   var valueLabel = series.bullets.push(new am4charts.LabelBullet());
-  // valueLabel.label.text = "{valueY}";
-  // valueLabel.label.horizontalCenter = "left";
+
   valueLabel.label.dx = 10;
   valueLabel.label.hideOversized = false;
   valueLabel.label.truncate = false;
 
   var categoryLabel = series.bullets.push(new am4charts.LabelBullet());
-  // categoryLabel.label.text = "{name}";
-  // categoryLabel.label.horizontalCenter = "right";
+  categoryLabel.label.text = "{name}";
+  categoryLabel.label.horizontalCenter = "right";
   categoryLabel.label.dx = -10;
   categoryLabel.label.fill = am4core.color("#fff");
   categoryLabel.label.hideOversized = true;
   categoryLabel.label.truncate = false;
+
 }
 
 createSeries("user1", user1);
 createSeries("user2", user2);
-chart.invalidateData();
 
 }); 
 
@@ -177,6 +182,8 @@ var chart = am4core.create("lanChart", am4charts.XYChart);
 
 // Add data
 chart.data = chartData;
+chart.legend = new am4charts.Legend();
+chart.legend.position="top";
 
 // Create axes
 var categorxAxis = chart.xAxes.push(new am4charts.CategoryAxis());
@@ -185,6 +192,8 @@ categorxAxis.numberFormatter.numberFormat = "#";
 categorxAxis.renderer.grid.template.location = 0;
 categorxAxis.renderer.cellStartLocation = 0.1;
 categorxAxis.renderer.cellEndLocation = 0.9;
+categorxAxis.renderer.labels.template.wrap=true;
+categorxAxis.renderer.labels.template.maxWidth=100;
 
 var  valueAxis = chart.yAxes.push(new am4charts.ValueAxis()); 
 
@@ -199,19 +208,17 @@ function createSeries(field, name) {
   series.sequencedInterpolation = true;
 
   var valueLabel = series.bullets.push(new am4charts.LabelBullet());
-  // valueLabel.label.text = "{valueY}";
-  // valueLabel.label.horizontalCenter = "left";
+
   valueLabel.label.dx = 10;
   valueLabel.label.hideOversized = false;
   valueLabel.label.truncate = false;
 
   var categoryLabel = series.bullets.push(new am4charts.LabelBullet());
-  // categoryLabel.label.text = "{name}";
-  // categoryLabel.label.horizontalCenter = "right";
+
   categoryLabel.label.dx = -10;
   categoryLabel.label.fill = am4core.color("#fff");
-  categoryLabel.label.hideOversized = true;
-  categoryLabel.label.truncate = false;
+  categoryLabel.label.hideOversized = false;
+  categoryLabel.label.truncate = true;
 }
 
 createSeries("user1", user1);
@@ -362,6 +369,9 @@ $(document).ready(function(){
           if( ! $('#overviewTableContainer').hasClass('hide')){
                    $('#overviewTableContainer').addClass('hide');
            }
+          if(! $('.sharethis').hasClass('hide')){
+            $('.sharethis').addClass('hide');
+          }
 
           $('.mdl-spinner').addClass('is-active');
 
