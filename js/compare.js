@@ -83,49 +83,51 @@ chart.legend.position="top";
 // Add data
 chart.data = chartData;
 
-
 // Create axes
-var categorxAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-categorxAxis.dataFields.category = "error";
-categorxAxis.numberFormatter.numberFormat = "#";
-categorxAxis.renderer.grid.template.location = 0;
-categorxAxis.renderer.cellStartLocation = 0.1;
-categorxAxis.renderer.cellEndLocation = 0.9;
-categorxAxis.renderer.labels.template.wrap=true;
-categorxAxis.renderer.labels.template.maxWidth=100;
+var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+categoryAxis.dataFields.category = "error";
+categoryAxis.renderer.grid.template.location = 0;
+categoryAxis.renderer.minGridDistance = 20;
+categoryAxis.renderer.maxGridDistance = 20;
+categoryAxis.renderer.cellStartLocation = 0.1;
+categoryAxis.renderer.cellEndLocation = 0.9;
 
+var label = categoryAxis.renderer.labels.template;
+label.maxWidth=130;
 
-var  valueAxis = chart.yAxes.push(new am4charts.ValueAxis()); 
+var  valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+valueAxis.min = 0;
 
 
 //Create series
-function createSeries(field, name) {
+function createSeries(field, name, stacked) {
   var series = chart.series.push(new am4charts.ColumnSeries());
   series.dataFields.valueY = field;
   series.dataFields.categoryX = "error";
   series.name = name;
   series.columns.template.tooltipText = "{name}: [bold]{valueY}[/]";
-  series.columns.template.height = am4core.percent(100);
-  series.sequencedInterpolation = true;
-
-  var valueLabel = series.bullets.push(new am4charts.LabelBullet());
-
-  valueLabel.label.dx = 10;
-  valueLabel.label.hideOversized = false;
-  valueLabel.label.truncate = false;
-
-  var categoryLabel = series.bullets.push(new am4charts.LabelBullet());
-  categoryLabel.label.text = "{name}";
-  categoryLabel.label.horizontalCenter = "right";
-  categoryLabel.label.dx = -10;
-  categoryLabel.label.fill = am4core.color("#fff");
-  categoryLabel.label.hideOversized = true;
-  categoryLabel.label.truncate = false;
-
+  series.stacked = stacked;
+  series.columns.template.width = am4core.percent(95);
 }
 
-createSeries("user1", user1);
-createSeries("user2", user2);
+categoryAxis.events.on("sizechanged", function(ev) {
+var axis = ev.target;
+  var cellWidth = axis.pixelWidth / (axis.endIndex - axis.startIndex);
+  if (cellWidth < axis.renderer.labels.template.maxWidth) {
+    axis.renderer.labels.template.rotation = -45;
+    axis.renderer.labels.template.horizontalCenter = "right";
+    axis.renderer.labels.template.verticalCenter = "middle";
+  }
+  else {
+    axis.renderer.labels.template.rotation = 0;
+    axis.renderer.labels.template.horizontalCenter = "middle";
+    axis.renderer.labels.template.verticalCenter = "top";
+  }
+});
+
+
+createSeries("user1", user1,false);
+createSeries("user2", user2,false);
 
 }); 
 
@@ -181,48 +183,43 @@ am4core.useTheme(am4themes_animated);
 var chart = am4core.create("lanChart", am4charts.XYChart);
 
 // Add data
-chart.data = chartData;
 chart.legend = new am4charts.Legend();
 chart.legend.position="top";
 
+// Add data
+chart.data = chartData;
+
 // Create axes
-var categorxAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-categorxAxis.dataFields.category = "language";
-categorxAxis.numberFormatter.numberFormat = "#";
-categorxAxis.renderer.grid.template.location = 0;
-categorxAxis.renderer.cellStartLocation = 0.1;
-categorxAxis.renderer.cellEndLocation = 0.9;
-categorxAxis.renderer.labels.template.wrap=true;
-categorxAxis.renderer.labels.template.maxWidth=100;
+var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+categoryAxis.dataFields.category = "language";
+categoryAxis.renderer.grid.template.location = 0;
+categoryAxis.renderer.minGridDistance = 20;
+categoryAxis.renderer.maxGridDistance = 20;
+categoryAxis.renderer.cellStartLocation = 0.1;
+categoryAxis.renderer.cellEndLocation = 0.9;
 
-var  valueAxis = chart.yAxes.push(new am4charts.ValueAxis()); 
+var label = categoryAxis.renderer.labels.template;
+label.maxWidth=100;
+label.wrap=true;
 
-// Create series
-function createSeries(field, name) {
+var  valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+valueAxis.min = 0;
+
+
+//Create series
+function createSeries(field, name, stacked) {
   var series = chart.series.push(new am4charts.ColumnSeries());
   series.dataFields.valueY = field;
   series.dataFields.categoryX = "language";
   series.name = name;
   series.columns.template.tooltipText = "{name}: [bold]{valueY}[/]";
-  series.columns.template.height = am4core.percent(100);
-  series.sequencedInterpolation = true;
-
-  var valueLabel = series.bullets.push(new am4charts.LabelBullet());
-
-  valueLabel.label.dx = 10;
-  valueLabel.label.hideOversized = false;
-  valueLabel.label.truncate = false;
-
-  var categoryLabel = series.bullets.push(new am4charts.LabelBullet());
-
-  categoryLabel.label.dx = -10;
-  categoryLabel.label.fill = am4core.color("#fff");
-  categoryLabel.label.hideOversized = false;
-  categoryLabel.label.truncate = true;
+  series.stacked = stacked;
+  series.columns.template.width = am4core.percent(95);
 }
 
-createSeries("user1", user1);
-createSeries("user2", user2);
+
+createSeries("user1", user1,false);
+createSeries("user2", user2,false);
 
 });
 
