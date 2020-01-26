@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>UVa Visualizer</title>
-    <link rel="shortcut icon" href="/favicon.jpg" type="image/jpg">
+
     <link rel="shortcut icon" type="image/jpg" href="./images/uva.jpg">
 
     
@@ -24,12 +24,8 @@
     <link rel="stylesheet" href="css/lib/material.cyan-light_blue.min.css">
     <link rel="stylesheet" href="css/lib/calmosaic/jquery.calmosaic.min.css">
      <link rel="stylesheet" href="css/style.css" />
-    <script src="js/lib/material.min.js"></script>
-
-    <!--Amcharts Resources -->
-      <script src="https://www.amcharts.com/lib/4/core.js"></script>
-      <script src="https://www.amcharts.com/lib/4/charts.js"></script>
-      <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+     <script src="js/lib/material.min.js"></script>
+    
     
 </head>
 <body >
@@ -40,7 +36,7 @@
               <span class="mdl-layout-title">UVa Visualizer</span>
               <div class="mdl-layout-spacer"></div>
               <nav class="mdl-navigation mdl-layout--large-screen-only">
-                <a href="index.html" class="mdl-button mdl-js-button mdl-js-ripple-effect" data-upgraded=",MaterialButton,MaterialRipple"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i> Home <span class="mdl-ripple"></span><span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></a>
+                <a href="index.html" class="mdl-button mdl-js-button mdl-js-ripple-effect" data-upgraded=",MaterialButton,MaterialRipple"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i> Home<span class="mdl-ripple"></span><span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></a>
                 <a href="compare.html" class="mdl-button mdl-js-button mdl-js-ripple-effect" data-upgraded=",MaterialButton,MaterialRipple"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">compare</i> Compare<span class="mdl-ripple"></span><span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></a>
                 <a href="about.html" class="mdl-button mdl-js-button mdl-js-ripple-effect" data-upgraded=",MaterialButton,MaterialRipple"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">feedback</i> Say something<span class="mdl-ripple"></span><span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></a>
               </nav>
@@ -100,11 +96,10 @@
           <!-- verdict and language presentation end-->
 
           <!-- Tags of problems chart start -->
-           <div class="mdl-grid ">
+           <div class="mdl-grid " >
                <div id="probsTag" class="hide card mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-cell--12-col-tablet">
                 <div class="vertical-space"></div>
                 <span id="tagsTitle" class="card-heading"></span>
-                <div class="vertical-space"></div>
                  <div id="tagsChart"></div>
               </div>
            </div>
@@ -192,11 +187,10 @@
     
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v5.0&appId=1368548573327999&autoLogAppEvents=1"></script>
 
-    <script src="js/lib/jquery-3.4.1.min.js"></script>
-    <script src="js/lib/moment.min.js"></script>
+<script src="js/lib/googlecharts-loader.js"></script>
+<script src="js/lib/jquery-3.4.1.min.js"></script>
+<script src="js/lib/moment.min.js"></script>
 <script src="js/lib/calmosaic/jquery.calmosaic.min.js"></script>
- 
-
  <script src="js/index.js"></script>
 </body>
 </html>

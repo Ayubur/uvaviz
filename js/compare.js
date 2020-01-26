@@ -59,77 +59,39 @@ function verdictsBarChart(array1,array2,user1,user2){
         Accepted2++;
     }
 
-    chartData[0]={'error': "Submission Error",user1: SE1,user2:SE2};
-    chartData[1]={'error': "Compiler Error",user1: CE1,user2:CE2};
-    chartData[2]={'error': "Runtime Error",user1: RE1,user2:RE2};
-    chartData[3]={'error': "Output Limit",user1: OL1,user2:OL2};
-    chartData[4]={'error': "Time Limit",user1: TL1,user2:TL2};
-    chartData[5]={'error': "Memory Limit",user1: ML1,user2:ML2};
-    chartData[6]={'error': "Wrong Answer",user1: WA1,user2:WA2};
-    chartData[7]={'error': "Presentation Error",user1: PE1,user2:PE2};
-    chartData[8]={'error': "Accepted",user1: Accepted1,user2:Accepted2};
+    chartData[0]=["Verdicts",user1,user2];
+    chartData[1]=["Submission Error",SE1,SE2];
+    chartData[2]=["Compiler Error",CE1,CE2];
+    chartData[3]=["Runtime Error",RE1,RE2];
+    chartData[4]=["Output Limit",OL1,OL2];
+    chartData[5]=["Time Limit",TL1,TL2];
+    chartData[6]=["Memory Limit",ML1,ML2];
+    chartData[7]=["Wrong Answer",WA1,WA2];
+    chartData[8]=["Presentation Error",PE1,PE2];
+    chartData[9]=["Accepted", Accepted1,Accepted2];
 
-am4core.ready(function() {
+    
 
-// Themes begin
-am4core.useTheme(am4themes_animated);
-// Themes end
+    google.charts.load('current', {'packages':['bar']});
+    google.charts.setOnLoadCallback(drawChart);
 
- // Create chart instance
-var chart = am4core.create("verdictChart", am4charts.XYChart);
-chart.legend = new am4charts.Legend();
-chart.legend.position="top";
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable(chartData);
 
-// Add data
-chart.data = chartData;
+      var options = {
+          width:100+'%',
+          bars: 'vertical',
+          legend: { position: 'bottom'},
+          animation:{
+            duration: 1000,
+            easing: 'out',
+          },
+      };
 
-// Create axes
-var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-categoryAxis.dataFields.category = "error";
-categoryAxis.renderer.grid.template.location = 0;
-categoryAxis.renderer.minGridDistance = 20;
-categoryAxis.renderer.maxGridDistance = 20;
-categoryAxis.renderer.cellStartLocation = 0.1;
-categoryAxis.renderer.cellEndLocation = 0.9;
+      var chart = new google.charts.Bar(document.getElementById('verdictChart'));
 
-var label = categoryAxis.renderer.labels.template;
-label.maxWidth=130;
-
-var  valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-valueAxis.min = 0;
-
-
-//Create series
-function createSeries(field, name, stacked) {
-  var series = chart.series.push(new am4charts.ColumnSeries());
-  series.dataFields.valueY = field;
-  series.dataFields.categoryX = "error";
-  series.name = name;
-  series.columns.template.tooltipText = "{name}: [bold]{valueY}[/]";
-  series.stacked = stacked;
-  series.columns.template.width = am4core.percent(95);
-}
-
-categoryAxis.events.on("sizechanged", function(ev) {
-var axis = ev.target;
-  var cellWidth = axis.pixelWidth / (axis.endIndex - axis.startIndex);
-  if (cellWidth < axis.renderer.labels.template.maxWidth) {
-    axis.renderer.labels.template.rotation = -45;
-    axis.renderer.labels.template.horizontalCenter = "right";
-    axis.renderer.labels.template.verticalCenter = "middle";
-  }
-  else {
-    axis.renderer.labels.template.rotation = 0;
-    axis.renderer.labels.template.horizontalCenter = "middle";
-    axis.renderer.labels.template.verticalCenter = "top";
-  }
-});
-
-
-createSeries("user1", user1,false);
-createSeries("user2", user2,false);
-
-}); 
+      chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
 
 
 }
@@ -167,61 +129,35 @@ function languagesBarChar(array1,array2,user1,user2){
         cPlus112++;
     }
 
-    chartData[0]={language: "ANSI C",user1:ansi1,user2:ansi2};
-    chartData[1]={language: "JAVA",user1:java1,user2:java2};
-    chartData[2]={language: "C++",user1:cPlus1,user2:cPlus2};
-    chartData[3]={language: "Pascal",user1:pascal1,user2:pascal2};
-    chartData[4]={language: "C++ 11",user1:cPlus111,user2:cPlus112};
+    chartData[0]=['Languages',user1,user2];
+    chartData[1]=["ANSI C",ansi1,ansi2];
+    chartData[2]=["JAVA",java1,java2];
+    chartData[3]=["C++",cPlus1,cPlus2];
+    chartData[4]=["Pascal",pascal1,pascal2];
+    chartData[5]=["C++ 11",cPlus111,cPlus112];
 
-am4core.ready(function() {
+    
+    google.charts.load('current', {'packages':['bar']});
+    google.charts.setOnLoadCallback(drawChart);
 
-// Themes begin
-am4core.useTheme(am4themes_animated);
-// Themes end
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable(chartData);
 
- // Create chart instance
-var chart = am4core.create("lanChart", am4charts.XYChart);
+      var options = {
+          width:100+'%',
+          bars: 'vertical',
+          legend: { position: 'bottom'},
+          animation:{
+            duration: 1000,
+            easing: 'out',
+          },
+      };
 
-// Add data
-chart.legend = new am4charts.Legend();
-chart.legend.position="top";
+      var chart = new google.charts.Bar(document.getElementById('lanChart'));
 
-// Add data
-chart.data = chartData;
+      chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
 
-// Create axes
-var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-categoryAxis.dataFields.category = "language";
-categoryAxis.renderer.grid.template.location = 0;
-categoryAxis.renderer.minGridDistance = 20;
-categoryAxis.renderer.maxGridDistance = 20;
-categoryAxis.renderer.cellStartLocation = 0.1;
-categoryAxis.renderer.cellEndLocation = 0.9;
-
-var label = categoryAxis.renderer.labels.template;
-label.maxWidth=100;
-label.wrap=true;
-
-var  valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-valueAxis.min = 0;
-
-
-//Create series
-function createSeries(field, name, stacked) {
-  var series = chart.series.push(new am4charts.ColumnSeries());
-  series.dataFields.valueY = field;
-  series.dataFields.categoryX = "language";
-  series.name = name;
-  series.columns.template.tooltipText = "{name}: [bold]{valueY}[/]";
-  series.stacked = stacked;
-  series.columns.template.width = am4core.percent(95);
-}
-
-
-createSeries("user1", user1,false);
-createSeries("user2", user2,false);
-
-});
 
 }
 
@@ -330,11 +266,6 @@ $(document).ready(function(){
      
      $('#submitButton').on('click',async(e)=>{
             e.preventDefault();
-
-            am4core.disposeAllCharts();
-
-
-          $('#verdictChart').empty();
            
           $('#handle1DivErr').text("Couldn't find user. Network problem?");
           $('#handle2DivErr').text("Couldn't find user. Network problem?");
@@ -422,6 +353,7 @@ $(document).ready(function(){
 
                                $('.mdl-spinner').removeClass('is-active');
                                $('.sharethis').removeClass('hide');
+                               
 
                 })
                        })

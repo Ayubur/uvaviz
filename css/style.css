@@ -1,3 +1,4 @@
+
 /** Global CSS **/
 
 .fb-like>span{
@@ -105,25 +106,17 @@ z-index: 9999999999;
 
 
 
-
-/** chart css  for compare two user**/
-#verdictChart1{
-    height: 400px;
-    width: 100%;
-}
-
-#verdictChart2{
-    height: 400px;
-    width: 100%;
-}
-
-
-
-
 /** chart css **/
 #verdictChart{
     height: 400px;
     width: 100%;
+    margin: 2rem;
+}
+#lanChart{
+    height: 400px;
+    width: 100%;
+    margin: 2rem; 
+
 }
 #languageChart{
     height: 400px;
@@ -132,7 +125,6 @@ z-index: 9999999999;
 
 #tagsChart{
     height: 400px;
-    width: 100%;
 }
 .heatmap-size{
     width: 100%;

@@ -91,7 +91,7 @@ function unsolvedProblems (array,userId){
 async function tagsOfProblems(array,username){
 
   var normal=0, special_judged=0;
-  var chartData=[];
+  var dataset=[];
 
   for(var i=0;i<array.length;i++){
      var response = await fetch(`https://uhunt.onlinejudge.org/api/p/id/${array[i][1]}`);
@@ -103,54 +103,27 @@ async function tagsOfProblems(array,username){
      });
   }
 
-  chartData=[
-
-      {
-        "Name":"Normal",
-        "value":normal
-      },
-      {
-        "Name":"Special Judged",
-        "value":special_judged
-      }
+  dataset=[
+      ["tags","count"],
+      ["Normal",normal ],
+      ["Special Judged",special_judged]
   ];
 
   $('#probsTag').removeClass('hide');
   $('#tagsTitle').text('Tags of '+username);
 
- am4core.ready(function() {
+  google.charts.load("current", {packages:["corechart"]});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable(dataset);
 
-// Themes begin
-am4core.useTheme(am4themes_animated);
-// Themes end
+    var options = {
+      pieHole: 0.6,
+    };
 
-// Create chart instance
-var chart = am4core.create("tagsChart", am4charts.PieChart);
-chart.legend = new am4charts.Legend();
-chart.legend.position="bottom";
-
-// Add data
-chart.data = chartData;
-
-// Set inner radius
-chart.innerRadius = am4core.percent(40);
-
-// Add and configure Series
-var pieSeries = chart.series.push(new am4charts.PieSeries());
- pieSeries.ticks.template.disabled = true;
- pieSeries.labels.template.disabled = true;
-pieSeries.dataFields.value = "value";
-pieSeries.dataFields.category = "Name";
-pieSeries.slices.template.stroke = am4core.color("#fff");
-pieSeries.slices.template.strokeWidth = 2;
-pieSeries.slices.template.strokeOpacity = 1;
-
-// This creates initial animation
-pieSeries.hiddenState.properties.opacity = 1;
-pieSeries.hiddenState.properties.endAngle = -90;
-pieSeries.hiddenState.properties.startAngle = -90;
-
-});
+    var chart = new google.visualization.PieChart(document.getElementById('tagsChart'));
+    chart.draw(data, options);
+  }
 
     $('.mdl-spinner').removeClass('is-active');
 }
@@ -223,44 +196,27 @@ function submissionLanguages(array,username){
         cPlus11++;
     }
 
-    chartData[0]={language: "ANSI C",total: ansi};
-    chartData[1]={language: "JAVA",total: java};
-    chartData[2]={language: "C++",total: cPlus};
-    chartData[3]={language: "Pascal",total: pascal};
-    chartData[4]={language: "C++ 11",total: cPlus11};
+    chartData[0]=["Language","Count"]
+    chartData[1]=["ANSI C",ansi];
+    chartData[2]=["JAVA",java];
+    chartData[3]=["C++",cPlus];
+    chartData[4]=["Pascal",pascal];
+    chartData[5]=["C++ 11",cPlus11];
 
   $('#lans').removeClass('hide');
   $('#lanTitle').text('Languages of '+username);
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(chartData);
 
-am4core.ready(function() {
+        var options = {
+          is3D: true,
+        };
 
-      // Themes begin
-      am4core.useTheme(am4themes_animated);
-      // Themes end
-
-      var chart = am4core.create("languageChart", am4charts.PieChart3D);
-      chart.hiddenState.properties.opacity = 0;
-      chart.data = chartData ;
-
-      var series = chart.series.push(new am4charts.PieSeries3D());
-      series.ticks.template.disabled = true;
-      series.dataFields.value = "total";
-      series.dataFields.depthValue = "total";
-      series.dataFields.category = "language";
-      series.slices.template.cornerRadius = 5;
-      series.colors.step = 3;
-
-      series.labels.template.text = "{category}";
-      series.labels.template.radius = am4core.percent(-40);
-      series.alignLabels = false;
-      series.labels.template.fill = am4core.color("white");
-      // series.labels.template.relativeRotation = 90;
-      series.labels.template.adapter.add("hidden",(hidden, target)=>{
-            return target.dataItem.values.value.percent < 5 ? true : false;
-      });
-
-
-})
+        var chart = new google.visualization.PieChart(document.getElementById('languageChart'));
+        chart.draw(data, options);
+  }
 }
 
 
@@ -293,15 +249,16 @@ function verdict(array,username){
         Accepted++;
     }
 
-    chartData[0]={error: "Submission Error",total: SE};
-    chartData[1]={error: "Compiler Error",total: CE};
-    chartData[2]={error: "Runtime Error",total: RE};
-    chartData[3]={error: "Output Limit",total: OL};
-    chartData[4]={error: "Time Limit",total: TL};
-    chartData[5]={error: "Memory Limit",total: ML};
-    chartData[6]={error: "Wrong Answer",total: WA};
-    chartData[7]={error: "Presentation Error",total: PE};
-    chartData[8]={error: "Accepted",total: Accepted};
+    chartData[0]=["Verdicts","Count"];
+    chartData[1]=["Submission Error",SE];
+    chartData[2]=["Compiler Error",CE];
+    chartData[3]=["Runtime Error",RE];
+    chartData[4]=["Output Limit", OL];
+    chartData[5]=["Time Limit",TL];
+    chartData[6]=["Memory Limit",ML];
+    chartData[7]=["Wrong Answer",WA];
+    chartData[8]=["Presentation Error",PE];
+    chartData[9]=["Accepted", Accepted];
 
 
 
@@ -309,34 +266,18 @@ function verdict(array,username){
       $('#verdictTitle').text('Verdicts of '+username);
 
 
-    am4core.ready(function() {
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(chartData);
 
-          // Themes begin
-          am4core.useTheme(am4themes_animated);
-          // Themes end
+        var options = {
+          is3D: true,
+        };
 
-          var chart = am4core.create("verdictChart", am4charts.PieChart3D);
-          chart.hiddenState.properties.opacity = 0;
-          chart.data = chartData ;
-
-          var series = chart.series.push(new am4charts.PieSeries3D());
-          //series.labels.template.disabled = true;
-          series.ticks.template.disabled = true;
-          series.labels.template.text = "{category}";
-          series.labels.template.radius = am4core.percent(-80);
-          series.alignLabels = false;
-         series.labels.template.fill = am4core.color("white");
-          series.labels.template.relativeRotation = 90;
-          series.dataFields.value = "total";
-          series.dataFields.depthValue = "total";
-          series.dataFields.category = "error";
-          series.slices.template.cornerRadius = 8;
-          series.colors.step = 3;
-          series.labels.template.adapter.add("hidden",(hidden, target)=>{
-            return target.dataItem.values.value.percent < 5 ? true : false;
-          });
-
-    })
+        var chart = new google.visualization.PieChart(document.getElementById('verdictChart'));
+        chart.draw(data, options);
+      }
 }
 
 
@@ -348,9 +289,6 @@ $(document).ready(function(){
     $('#handle').on('keydown', function(e){
         if(e.keyCode==13){
              e.preventDefault();
-
-             am4core.disposeAllCharts();
-
             var input_val = $(this).val();
 
            $('#handleDivErr').text("Couldn't find user. Network problem?");
