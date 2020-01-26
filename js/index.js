@@ -118,6 +118,7 @@ async function tagsOfProblems(array,username){
     var data = google.visualization.arrayToDataTable(dataset);
 
     var options = {
+      width:600,
       pieHole: 0.6,
     };
 
@@ -211,6 +212,7 @@ function submissionLanguages(array,username){
         var data = google.visualization.arrayToDataTable(chartData);
 
         var options = {
+          width:500,
           is3D: true,
         };
 
@@ -272,6 +274,7 @@ function verdict(array,username){
         var data = google.visualization.arrayToDataTable(chartData);
 
         var options = {
+          width:500,
           is3D: true,
         };
 

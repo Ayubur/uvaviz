@@ -1,6 +1,8 @@
 
 /** Global CSS **/
-
+.extra-margin{
+    margin: 2rem;
+}
 .fb-like>span{
     width: 140px !important;
 }
@@ -56,7 +58,7 @@ a{
 .card-heading{
     color: #665555;
     font-size: 20px;
-    margin-left: 40px;
+    margin-left: 1rem;
 }
 
 .vertical-space {
@@ -108,23 +110,21 @@ z-index: 9999999999;
 
 /** chart css **/
 #verdictChart{
-    height: 400px;
+    height: 350px;
     width: 100%;
-    margin: 2rem;
 }
 #lanChart{
-    height: 400px;
+    height: 350px;
     width: 100%;
-    margin: 2rem; 
 
 }
 #languageChart{
-    height: 400px;
+    height: 350px;
     width: 100%;
 }
 
 #tagsChart{
-    height: 400px;
+    height: 350px;
 }
 .heatmap-size{
     width: 100%;

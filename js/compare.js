@@ -60,7 +60,7 @@ function verdictsBarChart(array1,array2,user1,user2){
     }
 
     chartData[0]=["Verdicts",user1,user2];
-    chartData[1]=["Submission Error",SE1,SE2];
+    chartData[1]=["Accepted", Accepted1,Accepted2];
     chartData[2]=["Compiler Error",CE1,CE2];
     chartData[3]=["Runtime Error",RE1,RE2];
     chartData[4]=["Output Limit",OL1,OL2];
@@ -68,7 +68,7 @@ function verdictsBarChart(array1,array2,user1,user2){
     chartData[6]=["Memory Limit",ML1,ML2];
     chartData[7]=["Wrong Answer",WA1,WA2];
     chartData[8]=["Presentation Error",PE1,PE2];
-    chartData[9]=["Accepted", Accepted1,Accepted2];
+    chartData[9]=["Submission Error",SE1,SE2];
 
     
 
@@ -79,11 +79,10 @@ function verdictsBarChart(array1,array2,user1,user2){
       var data = google.visualization.arrayToDataTable(chartData);
 
       var options = {
-          width:100+'%',
-          bars: 'vertical',
-          legend: { position: 'bottom'},
+          width:1170,
+          legend: { position: 'left', alignment: 'start' },
           animation:{
-            duration: 1000,
+            duration: 1200,
             easing: 'out',
           },
       };
@@ -144,9 +143,8 @@ function languagesBarChar(array1,array2,user1,user2){
       var data = google.visualization.arrayToDataTable(chartData);
 
       var options = {
-          width:100+'%',
-          bars: 'vertical',
-          legend: { position: 'bottom'},
+          width:500,
+          legend:{ position: 'left', alignment: 'start' },
           animation:{
             duration: 1000,
             easing: 'out',
