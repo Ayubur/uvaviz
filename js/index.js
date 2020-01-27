@@ -94,13 +94,13 @@ async function tagsOfProblems(array,username){
   var dataset=[];
 
   for(var i=0;i<array.length;i++){
-     var response = await fetch(`https://uhunt.onlinejudge.org/api/p/id/${array[i][1]}`);
-     response.json().then((data)=>{
-         if(data.status == 1)
-             normal++;
-        else if(data.status ==2)
-             special_judged++;
-     });
+          var response = await fetch(`https://uhunt.onlinejudge.org/api/p/id/${array[i][1]}`);
+          response.json().then((data)=>{
+              if(data.status == 1)
+                  normal++;
+              else if(data.status ==2)
+                  special_judged++;
+          });
   }
 
   dataset=[
