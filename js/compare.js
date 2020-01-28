@@ -166,91 +166,128 @@ function overviewTable(array1,array2,user1,user2){
 
    $('#user1').text(user1);
 
-   var problems={},
-   max_count=-Infinity,
-   tried=0,
-   solve_one_sub=0,
-   total_submitted=0,
-   avg_attempt=0,
-   total_attempt=0,
-   max_attempt=null
-   solved_probs=[];
+   var problems1={},
+   max_count1=-Infinity,
+   tried1=0,
+   solve_one_sub1=0,
+   total_submitted1=0,
+   avg_attempt1=0,
+   total_attempt1=0,
+   max_attempt1=null
+   solved_probs1=[];
 
   for(var i=0;i<array1.length;i++){
-      problems[array1[i][1]]= (problems[array1[i][1]] || 0)+1;
-      if(array1[i][2]==90 && !solved_probs.includes(array1[i][1])){
-        solved_probs.push(array1[i][1]);
+      problems1[array1[i][1]]= (problems1[array1[i][1]] || 0)+1;
+      if(array1[i][2]==90 && !solved_probs1.includes(array1[i][1])){
+        solved_probs1.push(array1[i][1]);
       }
   }
 
-  for(var x in problems){
-    tried++;
-    if(problems[x] >max_count){
-       max_count=problems[x];
-       max_attempt=x;
-       total_attempt += problems[x];
+  for(var x in problems1){
+    tried1++;
+    if(problems1[x] >max_count1){
+       max_count1=problems1[x];
+       max_attempt1=x;
+       total_attempt1 += problems1[x];
     }
-    if(problems[x]==1)
-      solve_one_sub++;
+    if(problems1[x]==1)
+      solve_one_sub1++;
       
   }
 
   $('#totalSubmitted1').text(array1.length);
-  $('#tried1').text(tried);
-  $('#solved1').text(solved_probs.length);
-  $('#unsolved1').text(tried - solved_probs.length);
-  $('#averageAttempt1').text((tried/total_attempt).round(2))
-  $.ajax(`https://uhunt.onlinejudge.org/api/p/id/${max_attempt}`).then(function(data){
+  $('#tried1').text(tried1);
+  $('#solved1').text(solved_probs1.length);
+  $('#unsolved1').text(tried1 - solved_probs1.length);
+  $('#averageAttempt1').text((tried1/total_attempt1).round(2))
+  $.ajax(`https://uhunt.onlinejudge.org/api/p/id/${max_attempt1}`).then(function(data){
     $('#maxAttempt1').empty();
-        $('#maxAttempt1').append(max_count+" <a href='https://onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem="+max_attempt+"' target='_blank'> ("+data.num+")</a>")
+        $('#maxAttempt1').append(max_count1+" <a href='https://onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem="+max_attempt1+"' target='_blank'> ("+data.num+")</a>")
    })
-  $('#solvedWithOneSub1').text(solve_one_sub+ " ("+((solve_one_sub *100)/tried).round(2)+"%)");
+  $('#solvedWithOneSub1').text(solve_one_sub1+ " ("+((solve_one_sub1 *100)/tried1).round(2)+"%)");
 
 
 
 $('#user2').text(user2);
 
-   problems={};
-   max_count=-Infinity;
-   tried=0;
-   solve_one_sub=0;
-   total_submitted=0;
-   avg_attempt=0;
-   total_attempt=0;
-   max_attempt=null;
-   solved_probs=[];
+   var problems2={},
+   max_count2=-Infinity,
+   tried2=0,
+   solve_one_sub2=0,
+   total_submitted2=0,
+   avg_attempt2=0,
+   total_attempt2=0,
+   max_attempt2=null,
+   solved_probs2=[];
 
   for(var i=0;i<array2.length;i++){
-      problems[array2[i][1]]= (problems[array2[i][1]] || 0)+1;
-      if(array2[i][2]==90 && !solved_probs.includes(array2[i][1])){
-        solved_probs.push(array2[i][1]);
+      problems2[array2[i][1]]= (problems2[array2[i][1]] || 0)+1;
+      if(array2[i][2]==90 && !solved_probs2.includes(array2[i][1])){
+        solved_probs2.push(array2[i][1]);
       }
   }
 
-  for(var x in problems){
-    tried++;
-    if(problems[x] >max_count){
-       max_count=problems[x];
-       max_attempt=x;
-       total_attempt += problems[x];
+  for(var x in problems2){
+    tried2++;
+    if(problems2[x] >max_count2){
+       max_count2=problems2[x];
+       max_attempt2=x;
+       total_attempt2 += problems2[x];
     }
-    if(problems[x]==1)
-      solve_one_sub++;
+    if(problems2[x]==1)
+      solve_one_sub2++;
       
   }
 
   $('#totalSubmitted2').text(array2.length);
-  $('#tried2').text(tried);
-  $('#solved2').text(solved_probs.length);
-  $('#unsolved2').text(tried - solved_probs.length);
-  $('#averageAttempt2').text((tried/total_attempt).round(2))
-  $.ajax(`https://uhunt.onlinejudge.org/api/p/id/${max_attempt}`).then(function(data){
+  $('#tried2').text(tried2);
+  $('#solved2').text(solved_probs2.length);
+  $('#unsolved2').text(tried2 - solved_probs2.length);
+  $('#averageAttempt2').text((tried2/total_attempt2).round(2))
+  $.ajax(`https://uhunt.onlinejudge.org/api/p/id/${max_attempt2}`).then(function(data){
     $('#maxAttempt2').empty();
-        $('#maxAttempt2').append(max_count+" <a href='https://onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem="+max_attempt+"' target='_blank'> ("+data.num+")</a>")
+        $('#maxAttempt2').append(max_count2+" <a href='https://onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem="+max_attempt2+"' target='_blank'> ("+data.num+")</a>")
    })
-  $('#solvedWithOneSub2').text(solve_one_sub+ " ("+((solve_one_sub *100)/tried).round(2)+"%)");
+  $('#solvedWithOneSub2').text(solve_one_sub2+ " ("+((solve_one_sub2 *100)/tried2).round(2)+"%)");
 
 
+}
+
+function commonProblemSolvedTable(array1,array2){
+
+       var common=0;
+       var problemSolved1=[];
+       var problemSolved2=[];
+
+       for(var i=0;i<array1.length;i++){
+              if(array1[i][2]==90){
+                   problemSolved1.push(array1[i][1]);
+              }
+       }
+
+       problemSolved1 = problemSolved1.filter( function( item, index, inputArray ) {
+              return inputArray.indexOf(item) == index;
+       });
+
+       for(var i=0;i<array2.length;i++){
+              if(array2[i][2]==90){
+                   problemSolved2.push(array2[i][1]);
+              }
+       }
+
+       problemSolved2 = problemSolved2.filter( function( item, index, inputArray ) {
+              return inputArray.indexOf(item) == index;
+       });
+
+       for(var i=0;i<problemSolved1.length;i++){
+              for(var j=0;j<problemSolved2.length;j++){
+                     if(problemSolved1[i]==problemSolved2[j]){
+                            common ++;
+                     }
+              }
+       }
+        
+       $('#commonSolved').text(common);
 }
 
 
@@ -295,6 +332,9 @@ $(document).ready(function(){
           if( ! $('#overviewTableContainer').hasClass('hide')){
                    $('#overviewTableContainer').addClass('hide');
            }
+           if( ! $('#commonTableContainer').hasClass('hide')){
+              $('#commonTableContainer').addClass('hide');
+      }
           if(! $('.sharethis').hasClass('hide')){
             $('.sharethis').addClass('hide');
           }
@@ -343,11 +383,13 @@ $(document).ready(function(){
                               verdictsBarChart(data1.subs,data2.subs,handle1,handle2);
                               languagesBarChar(data1.subs,data2.subs,handle1,handle2);
                               overviewTable(data1.subs,data2.subs,handle1,handle2);
+                              commonProblemSolvedTable(data1.subs,data2.subs);
 
 
                                $('#verdictsContainer').removeClass('hide');
                                $('#lansContainer').removeClass('hide');
                                $('#overviewTableContainer').removeClass('hide');
+                               $('#commonTableContainer').removeClass('hide');
 
                                $('.mdl-spinner').removeClass('is-active');
                                $('.sharethis').removeClass('hide');
