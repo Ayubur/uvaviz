@@ -56,8 +56,9 @@ a{
 
 }
 .card-heading{
-    color: #665555;
-    font-size: 20px;
+    color: ##393939;
+    font-size: 18px;
+    font-weight: bold;
     margin-left: 1rem;
 }
 

@@ -22,3 +22,6 @@ This is code repository for a simple analytics visualization site for [UVa onlin
 * Average and max attempts compared
 * Count of problems solved with one submission compared
 * Tags compared
+
+#### Issues
+* Contest data is not added yet

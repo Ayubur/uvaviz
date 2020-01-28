@@ -3,6 +3,12 @@ Number.prototype.round = function(p) {
   return parseFloat( this.toFixed(p) );
 };
 
+function yearConverter(timestamps){
+       var d = new Date(timestamps*1000);
+       var year =d.getFullYear();
+       return year;
+}
+
 
 
 
@@ -79,6 +85,7 @@ function verdictsBarChart(array1,array2,user1,user2){
       var data = google.visualization.arrayToDataTable(chartData);
 
       var options = {
+           title: 'Verdicts',
           width:1170,
           legend: { position: 'left', alignment: 'start' },
           animation:{
@@ -143,6 +150,7 @@ function languagesBarChar(array1,array2,user1,user2){
       var data = google.visualization.arrayToDataTable(chartData);
 
       var options = {
+          title: 'Languages',
           width:500,
           legend:{ position: 'left', alignment: 'start' },
           animation:{
@@ -290,6 +298,75 @@ function commonProblemSolvedTable(array1,array2){
        $('#commonSolved').text(common);
 }
 
+function submissionGraph(array1,array2,user1,user2){
+
+       var years1=[],
+           years2=[],
+           dataset=[];
+       var c1=0;
+
+
+       array1.forEach(function(x){
+              years1[yearConverter(x[4])]=(years1[yearConverter(x[4])] || 0) + 1;
+       })
+
+       dataset[c1]=["Submission",user1,user2];
+       for(var i in years1){
+           c1++;
+           dataset[c1]=[i,years1[i],null];
+       }
+
+
+       array2.forEach(function(x){
+              years2[yearConverter(x[4])]=(years2[yearConverter(x[4])] || 0) + 1;
+       })
+
+
+       for(var i in years2){
+              c1++;
+           dataset[c1]=[i,null,years2[i]];
+           
+       }
+
+        for(var i=1;i<dataset.length;i++){
+               for(var j=i+1;j<dataset.length;j++){
+                      var temp=null;
+                      if(dataset[i][0]==dataset[j][0]){
+                             dataset[i][1]=dataset[i][1]+dataset[j][1];
+                             dataset[i][2]=dataset[i][2]+dataset[j][2];
+                             dataset.splice(j,1);
+                            
+                      }
+                      if(dataset[i][0] > dataset[j][0]){
+                            temp=dataset[j];
+                            dataset[j]=dataset[i];
+                            dataset[i]=temp;
+                      }
+               }
+        }
+
+       google.charts.load('current', {'packages':['line']});
+       google.charts.setOnLoadCallback(drawChart);
+ 
+     function drawChart() {
+ 
+       var data = new google.visualization.arrayToDataTable(dataset);
+ 
+       var options = {
+         chart: {
+           title: 'Submission',
+         },
+         legend:{ position: 'left', alignment: 'start' },
+         width: 800,
+         height: 300
+       };
+ 
+       var chart = new google.charts.Line(document.getElementById('subsChart'));
+ 
+       chart.draw(data,options);
+      }
+}
+
 
 
 
@@ -334,7 +411,10 @@ $(document).ready(function(){
            }
            if( ! $('#commonTableContainer').hasClass('hide')){
               $('#commonTableContainer').addClass('hide');
-      }
+           }
+           if( ! $('#submissionGraphContainer').hasClass('hide')){
+              $('#submissionGraphContainer').addClass('hide');
+           }
           if(! $('.sharethis').hasClass('hide')){
             $('.sharethis').addClass('hide');
           }
@@ -384,12 +464,14 @@ $(document).ready(function(){
                               languagesBarChar(data1.subs,data2.subs,handle1,handle2);
                               overviewTable(data1.subs,data2.subs,handle1,handle2);
                               commonProblemSolvedTable(data1.subs,data2.subs);
+                              submissionGraph(data1.subs,data2.subs,handle1,handle2)
 
 
                                $('#verdictsContainer').removeClass('hide');
                                $('#lansContainer').removeClass('hide');
                                $('#overviewTableContainer').removeClass('hide');
                                $('#commonTableContainer').removeClass('hide');
+                               $('#submissionGraphContainer').removeClass('hide');
 
                                $('.mdl-spinner').removeClass('is-active');
                                $('.sharethis').removeClass('hide');

@@ -57,7 +57,6 @@ function displayHeatmaps(array,username){
           });
        }
    });
-
   
 
 }
@@ -110,7 +109,6 @@ async function tagsOfProblems(array,username){
   ];
 
   $('#probsTag').removeClass('hide');
-  $('#tagsTitle').text('Tags of '+username);
 
   google.charts.load("current", {packages:["corechart"]});
   google.charts.setOnLoadCallback(drawChart);
@@ -118,6 +116,7 @@ async function tagsOfProblems(array,username){
     var data = google.visualization.arrayToDataTable(dataset);
 
     var options = {
+      title: 'Tags of '+username,
       width:600,
       pieHole: 0.6,
     };
@@ -205,13 +204,15 @@ function submissionLanguages(array,username){
     chartData[5]=["C++ 11",cPlus11];
 
   $('#lans').removeClass('hide');
-  $('#lanTitle').text('Languages of '+username);
+
       google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = google.visualization.arrayToDataTable(chartData);
 
         var options = {
+
+          title: 'Languages of '+username,
           width:500,
           is3D: true,
         };
@@ -252,7 +253,7 @@ function verdict(array,username){
     }
 
     chartData[0]=["Verdicts","Count"];
-    chartData[1]=["Submission Error",SE];
+    chartData[1]=["Accepted", Accepted];
     chartData[2]=["Compiler Error",CE];
     chartData[3]=["Runtime Error",RE];
     chartData[4]=["Output Limit", OL];
@@ -260,13 +261,11 @@ function verdict(array,username){
     chartData[6]=["Memory Limit",ML];
     chartData[7]=["Wrong Answer",WA];
     chartData[8]=["Presentation Error",PE];
-    chartData[9]=["Accepted", Accepted];
+    chartData[9]=["Submission Error",SE];
 
 
 
       $('#verdicts').removeClass('hide');
-      $('#verdictTitle').text('Verdicts of '+username);
-
 
       google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
@@ -274,6 +273,7 @@ function verdict(array,username){
         var data = google.visualization.arrayToDataTable(chartData);
 
         var options = {
+          title: 'Verdicts of '+username,
           width:500,
           is3D: true,
         };
