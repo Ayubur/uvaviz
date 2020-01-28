@@ -169,7 +169,7 @@ function overviewTable(array,username){
   $('#tried').text(tried);
   $('#solved').text(solved_probs.length);
   $('#unsolved').text(tried - solved_probs.length);
-  $('#averageAttempt').text((tried/total_attempt).round(2))
+  $('#averageAttempt').text((array.length/tried).round(2))
   $.ajax(`https://uhunt.onlinejudge.org/api/p/id/${max_attempt}`).then(function(data){
     $('#maxAttempt').empty();
         $('#maxAttempt').append(max_count+" <a href='https://onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem="+max_attempt+"' target='_blank'> ("+data.num+")</a>")

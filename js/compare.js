@@ -207,7 +207,7 @@ function overviewTable(array1,array2,user1,user2){
   $('#tried1').text(tried1);
   $('#solved1').text(solved_probs1.length);
   $('#unsolved1').text(tried1 - solved_probs1.length);
-  $('#averageAttempt1').text((tried1/total_attempt1).round(2))
+  $('#averageAttempt1').text((array1.length/tried1).round(2))
   $.ajax(`https://uhunt.onlinejudge.org/api/p/id/${max_attempt1}`).then(function(data){
     $('#maxAttempt1').empty();
         $('#maxAttempt1').append(max_count1+" <a href='https://onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem="+max_attempt1+"' target='_blank'> ("+data.num+")</a>")
@@ -251,7 +251,7 @@ $('#user2').text(user2);
   $('#tried2').text(tried2);
   $('#solved2').text(solved_probs2.length);
   $('#unsolved2').text(tried2 - solved_probs2.length);
-  $('#averageAttempt2').text((tried2/total_attempt2).round(2))
+  $('#averageAttempt2').text((array2.length/tried2).round(2))
   $.ajax(`https://uhunt.onlinejudge.org/api/p/id/${max_attempt2}`).then(function(data){
     $('#maxAttempt2').empty();
         $('#maxAttempt2').append(max_count2+" <a href='https://onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem="+max_attempt2+"' target='_blank'> ("+data.num+")</a>")
