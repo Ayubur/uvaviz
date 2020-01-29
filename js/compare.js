@@ -310,17 +310,17 @@ function submissionGraph(array1,array2,user1,user2){
               years1[yearConverter(x[4])]=(years1[yearConverter(x[4])] || 0) + 1;
        })
 
-       dataset[c1]=["Submission",user1,user2];
-       for(var i in years1){
-           c1++;
-           dataset[c1]=[i,years1[i],null];
-       }
-
-
+       
        array2.forEach(function(x){
               years2[yearConverter(x[4])]=(years2[yearConverter(x[4])] || 0) + 1;
        })
 
+       dataset[c1]=["Submission",user1,user2];
+
+       for(var i in years1){
+           c1++;
+           dataset[c1]=[i,years1[i],null];
+       }
 
        for(var i in years2){
               c1++;
@@ -328,22 +328,29 @@ function submissionGraph(array1,array2,user1,user2){
            
        }
 
+
         for(var i=1;i<dataset.length;i++){
                for(var j=i+1;j<dataset.length;j++){
-                      var temp=null;
+                      
                       if(dataset[i][0]==dataset[j][0]){
                              dataset[i][1]=dataset[i][1]+dataset[j][1];
                              dataset[i][2]=dataset[i][2]+dataset[j][2];
-                             dataset.splice(j,1);
-                            
+                             dataset.splice(j,1);  
                       }
-                      if(dataset[i][0] > dataset[j][0]){
+               }
+        }
+
+        for(var i=1;i<dataset.length;i++){
+              for(var j=i+1;j<dataset.length;j++){
+                     var temp=null;
+                     if(dataset[i][0] > dataset[j][0]){
                             temp=dataset[j];
                             dataset[j]=dataset[i];
                             dataset[i]=temp;
                       }
-               }
+              }
         }
+        
 
        google.charts.load('current', {'packages':['line']});
        google.charts.setOnLoadCallback(drawChart);
