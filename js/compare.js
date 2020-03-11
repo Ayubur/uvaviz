@@ -14,13 +14,14 @@ function yearConverter(timestamps){
 
 //verdicts pie chart
 
-function verdictsBarChart(array1,array2,user1,user2){
+function verdictsChart(array1,array2,user1,user2){
 
     
  var SE1=0,CE1=0,RE1=0,OL1=0,TL1=0,ML1=0,WA1=0,PE1=0,Accepted1=0,
   SE2=0,CE2=0,RE2=0,OL2=0,TL2=0,ML2=0,WA2=0,PE2=0,Accepted2=0;
 
-   var chartData=[];
+   var chartData1=[];
+   var chartData2=[];
 
     for(var i=0;i<array1.length;i++){
         if(array1[i][2]==10)
@@ -42,6 +43,35 @@ function verdictsBarChart(array1,array2,user1,user2){
        else
         Accepted1++;
     }
+
+    chartData1[0]=["Verdicts",user1];
+    chartData1[1]=["Accepted", Accepted1];
+    chartData1[2]=["Compiler Error",CE1];
+    chartData1[3]=["Runtime Error",RE1];
+    chartData1[4]=["Output Limit",OL1];
+    chartData1[5]=["Time Limit",TL1];
+    chartData1[6]=["Memory Limit",ML1];
+    chartData1[7]=["Wrong Answer",WA1];
+    chartData1[8]=["Presentation Error",PE1];
+    chartData1[9]=["Submission Error",SE1];
+
+      $('#verdicts1').removeClass('hide');
+
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart1);
+      function drawChart1() {
+        var data1 = google.visualization.arrayToDataTable(chartData1);
+
+        var options1 = {
+          title: 'Verdicts of '+user1,
+          width:500,
+          is3D: true,
+        };
+
+        var chart1 = new google.visualization.PieChart(document.getElementById('verdictChart1'));
+        chart1.draw(data1, options1);
+      }
+
 
 
     for(var i=0;i<array2.length;i++){
@@ -65,50 +95,47 @@ function verdictsBarChart(array1,array2,user1,user2){
         Accepted2++;
     }
 
-    chartData[0]=["Verdicts",user1,user2];
-    chartData[1]=["Accepted", Accepted1,Accepted2];
-    chartData[2]=["Compiler Error",CE1,CE2];
-    chartData[3]=["Runtime Error",RE1,RE2];
-    chartData[4]=["Output Limit",OL1,OL2];
-    chartData[5]=["Time Limit",TL1,TL2];
-    chartData[6]=["Memory Limit",ML1,ML2];
-    chartData[7]=["Wrong Answer",WA1,WA2];
-    chartData[8]=["Presentation Error",PE1,PE2];
-    chartData[9]=["Submission Error",SE1,SE2];
+    chartData2[0]=["Verdicts",user2];
+    chartData2[1]=["Accepted", Accepted2];
+    chartData2[2]=["Compiler Error",CE2];
+    chartData2[3]=["Runtime Error",RE2];
+    chartData2[4]=["Output Limit",OL2];
+    chartData2[5]=["Time Limit",TL2];
+    chartData2[6]=["Memory Limit",ML2];
+    chartData2[7]=["Wrong Answer",WA2];
+    chartData2[8]=["Presentation Error",PE2];
+    chartData2[9]=["Submission Error",SE2];
 
-    
+     $('#verdicts2').removeClass('hide');
 
-    google.charts.load('current', {'packages':['bar']});
-    google.charts.setOnLoadCallback(drawChart);
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data2 = google.visualization.arrayToDataTable(chartData2);
 
-    function drawChart() {
-      var data = google.visualization.arrayToDataTable(chartData);
+        var options2 = {
+          title: 'Verdicts of '+user2,
+          width:500,
+          is3D: true,
+        };
 
-      var options = {
-           title: 'Verdicts',
-          width:1170,
-          legend: { position: 'left', alignment: 'start' },
-          animation:{
-            duration: 1200,
-            easing: 'out',
-          },
-      };
-
-      var chart = new google.charts.Bar(document.getElementById('verdictChart'));
-
-      chart.draw(data, google.charts.Bar.convertOptions(options));
-    }
+        var chart2 = new google.visualization.PieChart(document.getElementById('verdictChart2'));
+        chart2.draw(data2, options2);
+      }
 
 
 }
 
 //submission languages
 
-function languagesBarChar(array1,array2,user1,user2){
+function languagesChart(array1,array2,user1,user2){
 
   var ansi1=0,java1=0,cPlus1=0,pascal1=0, cPlus111=0,
   ansi2=0,java2=0,cPlus2=0,pascal2=0, cPlus112=0;
-  var chartData =[];
+
+  var chartData1 =[];
+  var chartData2=[];
+
    for(var i=0;i<array1.length;i++){
         if(array1[i][5]==1)
               ansi1++;
@@ -121,6 +148,32 @@ function languagesBarChar(array1,array2,user1,user2){
        else
         cPlus111++;
     }
+
+    chartData1[0]=['Languages',user1];
+    chartData1[1]=["ANSI C",ansi1];
+    chartData1[2]=["JAVA",java1];
+    chartData1[3]=["C++",cPlus1];
+    chartData1[4]=["Pascal",pascal1];
+    chartData1[5]=["C++ 11",cPlus111];
+
+      $('#lans1').removeClass('hide');
+
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart1);
+      function drawChart1() {
+        var data = google.visualization.arrayToDataTable(chartData1);
+
+        var options = {
+          title: 'Languages of '+user1,
+          width:500,
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('lanChart1'));
+        chart.draw(data, options);
+      }
+
+
 
   for(var i=0;i<array2.length;i++){
         if(array2[i][5]==1)
@@ -135,36 +188,29 @@ function languagesBarChar(array1,array2,user1,user2){
         cPlus112++;
     }
 
-    chartData[0]=['Languages',user1,user2];
-    chartData[1]=["ANSI C",ansi1,ansi2];
-    chartData[2]=["JAVA",java1,java2];
-    chartData[3]=["C++",cPlus1,cPlus2];
-    chartData[4]=["Pascal",pascal1,pascal2];
-    chartData[5]=["C++ 11",cPlus111,cPlus112];
+    chartData2[0]=['Languages',user2];
+    chartData2[1]=["ANSI C",ansi2];
+    chartData2[2]=["JAVA",java2];
+    chartData2[3]=["C++",cPlus2];
+    chartData2[4]=["Pascal",pascal2];
+    chartData2[5]=["C++ 11",cPlus112];
 
-    
-    google.charts.load('current', {'packages':['bar']});
-    google.charts.setOnLoadCallback(drawChart);
+         $('#lans2').removeClass('hide');
 
-    function drawChart() {
-      var data = google.visualization.arrayToDataTable(chartData);
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data2 = google.visualization.arrayToDataTable(chartData2);
 
-      var options = {
-          title: 'Languages',
+        var options2 = {
+          title: 'Languages of '+user2,
           width:500,
-          legend:{ position: 'left', alignment: 'start' },
-          animation:{
-            duration: 1000,
-            easing: 'out',
-          },
-      };
+          is3D: true,
+        };
 
-      var chart = new google.charts.Bar(document.getElementById('lanChart'));
-
-      chart.draw(data, google.charts.Bar.convertOptions(options));
-    }
-
-
+        var chart2 = new google.visualization.PieChart(document.getElementById('lanChart2'));
+        chart2.draw(data2, options2);
+      }
 }
 
 
@@ -467,8 +513,8 @@ $(document).ready(function(){
                                return;
                               }
 
-                              verdictsBarChart(data1.subs,data2.subs,handle1,handle2);
-                              languagesBarChar(data1.subs,data2.subs,handle1,handle2);
+                              verdictsChart(data1.subs,data2.subs,handle1,handle2);
+                              languagesChart(data1.subs,data2.subs,handle1,handle2);
                               overviewTable(data1.subs,data2.subs,handle1,handle2);
                               commonProblemSolvedTable(data1.subs,data2.subs);
                               submissionGraph(data1.subs,data2.subs,handle1,handle2)

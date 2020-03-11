@@ -1,3 +1,14 @@
+.compareVerdictChart{
+    height: 350px;
+}
+
+.compareLanChart{
+    height: 350px;
+}
+
+.mdl-button{
+    font-family:sans-serif !important;
+}
 
 /** Global CSS **/
 .extra-margin{
