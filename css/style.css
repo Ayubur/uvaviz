@@ -67,7 +67,7 @@ a{
 
 }
 .card-heading{
-    color: ##393939;
+    color: #393939;
     font-size: 18px;
     font-weight: bold;
     margin-left: 1rem;
@@ -104,18 +104,24 @@ a{
 
 
 /** NOTE - spinner size is multiple of 28 **/
+
+
 .mdl-spinner {
   width: 56px;
   height: 56px;
-  position: fixed;
+  left: 50%;
   top: 50%;
-  left: 45%;
-z-index: 9999999999;
+
+  position: fixed;
+  z-index: 9999999999;
+
+  margin-left: -28px;
 
 }
 
+
 .mdl-spinner__circle {
-  border-width: 6px;
+  border-width: 5px;
 }
 
 

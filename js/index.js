@@ -83,50 +83,53 @@ function unsolvedProblems (array,userId){
 
 
    }
+
+   $('.mdl-spinner').removeClass('is-active');
+
    
 }
 
 // diaplaying tags of problems 
-async function tagsOfProblems(array,username){
+// async function tagsOfProblems(array,username){
 
-  var normal=0, special_judged=0;
-  var dataset=[];
+//   var normal=0, special_judged=0;
+//   var dataset=[];
 
-  for(var i=0;i<array.length;i++){
-          var response = await fetch(`https://uhunt.onlinejudge.org/api/p/id/${array[i][1]}`);
-          response.json().then((data)=>{
-              if(data.status == 1)
-                  normal++;
-              else if(data.status ==2)
-                  special_judged++;
-          });
-  }
+//   for(var i=0;i<array.length;i++){
+//           var response = await fetch(`https://uhunt.onlinejudge.org/api/p/id/${array[i][1]}`);
+//           response.json().then((data)=>{
+//               if(data.status == 1)
+//                   normal++;
+//               else if(data.status ==2)
+//                   special_judged++;
+//           });
+//   }
 
-  dataset=[
-      ["tags","count"],
-      ["Normal",normal ],
-      ["Special Judged",special_judged]
-  ];
+//   dataset=[
+//       ["tags","count"],
+//       ["Normal",normal ],
+//       ["Special Judged",special_judged]
+//   ];
 
-  $('#probsTag').removeClass('hide');
+//   $('#probsTag').removeClass('hide');
 
-  google.charts.load("current", {packages:["corechart"]});
-  google.charts.setOnLoadCallback(drawChart);
-  function drawChart() {
-    var data = google.visualization.arrayToDataTable(dataset);
+//   google.charts.load("current", {packages:["corechart"]});
+//   google.charts.setOnLoadCallback(drawChart);
+//   function drawChart() {
+//     var data = google.visualization.arrayToDataTable(dataset);
 
-    var options = {
-      title: 'Tags of '+username,
-      width:600,
-      pieHole: 0.6,
-    };
+//     var options = {
+//       title: 'Tags of '+username,
+//       width:600,
+//       pieHole: 0.6,
+//     };
 
-    var chart = new google.visualization.PieChart(document.getElementById('tagsChart'));
-    chart.draw(data, options);
-  }
+//     var chart = new google.visualization.PieChart(document.getElementById('tagsChart'));
+//     chart.draw(data, options);
+//   }
 
-    $('.mdl-spinner').removeClass('is-active');
-}
+//     $('.mdl-spinner').removeClass('is-active');
+// }
 
 
 //overview table
@@ -361,7 +364,7 @@ $(document).ready(function(){
 
                         submissionLanguages(data.subs,input_val);
                         verdict(data.subs,input_val);
-                        tagsOfProblems(data.subs,input_val);
+                        // tagsOfProblems(data.subs,input_val);
                         overviewTable(data.subs,input_val);
                         unsolvedProblems(data.subs,userId);
                         displayHeatmaps(data.subs,input_val);
